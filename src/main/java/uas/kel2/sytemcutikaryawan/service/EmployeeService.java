@@ -44,4 +44,8 @@ public class EmployeeService implements UserDetailsService {
         user.setPassword(encondedPassword);
         return employeeRepo.save(user);
     }
+
+    public Iterable<Employee> findALl(){
+        return employeeRepo.findAll();
+    }
 }

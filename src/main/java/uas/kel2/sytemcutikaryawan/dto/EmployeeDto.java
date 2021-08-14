@@ -1,6 +1,7 @@
 package uas.kel2.sytemcutikaryawan.dto;
 
 import lombok.Data;
+import uas.kel2.sytemcutikaryawan.models.Role;
 
 import javax.persistence.Column;
 
@@ -13,4 +14,5 @@ public class EmployeeDto {
     private String email;
     private String username;
     private String password;
+    private Role role;
 }

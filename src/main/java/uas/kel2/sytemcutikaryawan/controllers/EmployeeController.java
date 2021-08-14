@@ -3,17 +3,14 @@ package uas.kel2.sytemcutikaryawan.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.EmployeeDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -29,6 +26,12 @@ public class EmployeeController {
         response.setStatus(true);
         response.getMessages().add("employee saved!!");
         return ResponseEntity.ok(response);
+
+    }
+
+    @GetMapping("/findAll")
+    public Iterable<Employee> findAll(){
+        return employeeService.findALl();
 
     }
 }

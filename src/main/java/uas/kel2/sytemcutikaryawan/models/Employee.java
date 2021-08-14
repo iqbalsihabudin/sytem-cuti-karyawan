@@ -32,12 +32,12 @@ public class Employee implements UserDetails {
     private String email;
     @Column(length = 50)
     private String username;
-    @Column(length = 50)
+    @Column(length = 250)
     private String password;
     @Column(name = "is_deleted")
     private Boolean deleted = Boolean.FALSE;
     @ManyToOne
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "role_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Role role;
 
