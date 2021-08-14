@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.repo.EmployeeRepo;
+import uas.kel2.sytemcutikaryawan.utis.PasswordEncoder;
 
 import javax.transaction.Transactional;
 
@@ -17,6 +19,9 @@ public class EmployeeService implements UserDetailsService {
 
     @Autowired
     EmployeeRepo employeeRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
@@ -37,6 +42,6 @@ public class EmployeeService implements UserDetailsService {
 
         String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encondedPassword);
-        return appUserRepo.save(user);
+        return employeeRepo.save(user);
     }
 }
