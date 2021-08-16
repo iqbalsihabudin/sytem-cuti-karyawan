@@ -29,6 +29,11 @@ public class EmployeeController {
 
     }
 
+    @GetMapping("/cek")
+    public String cek(){
+        return "selamat";
+    }
+
     @GetMapping("/findAll")
     public Iterable<Employee> findAll(){
         return employeeService.findALl();
