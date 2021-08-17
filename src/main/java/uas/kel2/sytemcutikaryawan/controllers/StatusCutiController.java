@@ -32,6 +32,7 @@ public class StatusCutiController {
         StatusCuti statusCuti = modelMapper.map(statusCutiDto, StatusCuti.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("insert sukses");
         responseData.setPayLoad(statusCutiService.save(statusCuti));
         return ResponseEntity.ok(responseData);
     }
@@ -43,6 +44,7 @@ public class StatusCutiController {
         StatusCuti statusCuti = modelMapper.map(statusCutiDto, StatusCuti.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("update sukses");
         responseData.setPayLoad(statusCutiService.save(statusCuti));
         return ResponseEntity.ok(responseData);
     }

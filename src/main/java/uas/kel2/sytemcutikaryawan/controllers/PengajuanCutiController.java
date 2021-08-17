@@ -32,8 +32,8 @@ public class PengajuanCutiController {
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
 
         responseData.setStatus(true);
-        pengajuanCutiService.save(pengajuanCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("insert sukses");
+        responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         return ResponseEntity.ok(responseData);
     }
 
@@ -44,8 +44,8 @@ public class PengajuanCutiController {
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
 
         responseData.setStatus(true);
-        pengajuanCutiService.save(pengajuanCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("update sukses");
+        responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         return ResponseEntity.ok(responseData);
     }
 }

@@ -1,6 +1,7 @@
 package uas.kel2.sytemcutikaryawan.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class Employee implements UserDetails {
     private String password;
     @Column(name = "is_deleted")
     private Boolean deleted = Boolean.FALSE;
+    private Boolean accountNonExpired = Boolean.TRUE;
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -43,6 +45,7 @@ public class Employee implements UserDetails {
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getNameRole());
         return Collections.singletonList(authority);
@@ -50,7 +53,7 @@ public class Employee implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
 
     @Override
@@ -65,6 +68,6 @@ public class Employee implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !this.deleted;
     }
 }

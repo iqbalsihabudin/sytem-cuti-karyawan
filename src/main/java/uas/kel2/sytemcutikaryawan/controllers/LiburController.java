@@ -36,6 +36,7 @@ public class LiburController {
         Libur libur = modelMapper.map(liburDto, Libur.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("insert sukses");
         responseData.setPayLoad(liburService.save(libur));
         return ResponseEntity.ok(responseData);
     }
@@ -47,6 +48,7 @@ public class LiburController {
         Libur libur = modelMapper.map(liburDto, Libur.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("update sukses");
         responseData.setPayLoad(liburService.save(libur));
         return ResponseEntity.ok(responseData);
     }

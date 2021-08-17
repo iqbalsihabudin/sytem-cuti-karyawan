@@ -30,8 +30,8 @@ public class HakCutiController {
         HakCuti hakCuti = modelMapper.map(hakCutiDto, HakCuti.class);
 
         responseData.setStatus(true);
-        hakCutiService.save(hakCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("insert sukses");
+        responseData.setPayLoad(hakCutiService.save(hakCuti));
         return ResponseEntity.ok(responseData);
     }
 
@@ -42,8 +42,8 @@ public class HakCutiController {
         HakCuti hakCuti = modelMapper.map(hakCutiDto, HakCuti.class);
 
         responseData.setStatus(true);
-        hakCutiService.save(hakCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("update sukses");
+        responseData.setPayLoad(hakCutiService.save(hakCuti));
         return ResponseEntity.ok(responseData);
     }
 }

@@ -30,6 +30,7 @@ public class JenisCutiController {
         JenisCuti jenisCuti = modelMapper.map(jenisCutiDto, JenisCuti.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("update sukses");
         responseData.setPayLoad(jenisCutiService.save(jenisCuti));
         return ResponseEntity.ok(responseData);
     }
@@ -41,6 +42,7 @@ public class JenisCutiController {
         JenisCuti jenisCuti = modelMapper.map(jenisCutiDto, JenisCuti.class);
 
         responseData.setStatus(true);
+        responseData.getMessages().add("insert sukses");
         responseData.setPayLoad(jenisCutiService.save(jenisCuti));
         return ResponseEntity.ok(responseData);
     }

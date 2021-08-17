@@ -33,7 +33,7 @@ public class DetailPengajuanCutiController {
 
         responseData.setStatus(true);
         detailPengajuanCutiService.save(detailPengajuanCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("insert sukses");
         return ResponseEntity.ok(responseData);
     }
 
@@ -45,7 +45,7 @@ public class DetailPengajuanCutiController {
 
         responseData.setStatus(true);
         detailPengajuanCutiService.save(detailPengajuanCuti);
-//        responseData.setPayLoad();
+        responseData.getMessages().add("update sukses");
         return ResponseEntity.ok(responseData);
     }
 }
