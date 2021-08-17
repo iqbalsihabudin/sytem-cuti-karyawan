@@ -32,8 +32,6 @@ public class LiburService {
         return liburs;
     }
 
-
-
     public void remove(Integer id){
         liburRepo.deleteById(id);
     }

@@ -20,7 +20,12 @@ public class HakCutiController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<HakCuti> findAll(){ return hakCutiService.findALl();
+    public Iterable<HakCuti> findAll(@RequestParam(value = "isDeletede", required = false, defaultValue = "false") boolean isDeleted){
+        return hakCutiService.findALl(isDeleted);
+    }
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        hakCutiService.remove(id);
     }
 
     @PostMapping("/insertHakCuti")
@@ -46,4 +51,5 @@ public class HakCutiController {
         responseData.setPayLoad(hakCutiService.save(hakCuti));
         return ResponseEntity.ok(responseData);
     }
+
 }
