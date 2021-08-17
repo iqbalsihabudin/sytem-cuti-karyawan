@@ -24,7 +24,6 @@ public class LiburService {
     private EntityManager entityManager;
 
     public Iterable<Libur> findALl(boolean isDeleted){
-//        return liburRepo.findAll();
         Session session = entityManager.unwrap(Session.class);
         Filter filter = session.enableFilter("deletedLiburFilter");
         filter.setParameter("isDeleted", isDeleted);
@@ -43,7 +42,6 @@ public class LiburService {
         if (libur.getLiburId() != null){
             Libur currentLibur = liburRepo.findById(libur.getLiburId()).get();
             modelMapper.map(libur, currentLibur);
-//            currentLibur.set(category.getName());
             libur = currentLibur;
         }
         return liburRepo.save(libur);

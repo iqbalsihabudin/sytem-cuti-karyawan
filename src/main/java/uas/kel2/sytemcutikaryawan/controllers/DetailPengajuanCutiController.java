@@ -22,7 +22,8 @@ public class DetailPengajuanCutiController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<DetailPengajuanCuti> findAll(){ return detailPengajuanCutiService.findALl();
+    public Iterable<DetailPengajuanCuti> findAll(@RequestParam(value = "isDeletede", required = false, defaultValue = "false") boolean isDeleted){
+        return detailPengajuanCutiService.findALl(isDeleted);
     }
 
     @PostMapping("/insertDetailPengajuanCuti")
@@ -32,7 +33,7 @@ public class DetailPengajuanCutiController {
         DetailPengajuanCuti detailPengajuanCuti = modelMapper.map(detailPengajuanCutiDto, DetailPengajuanCuti.class);
 
         responseData.setStatus(true);
-        detailPengajuanCutiService.save(detailPengajuanCuti);
+        responseData.setPayLoad(detailPengajuanCutiService.save(detailPengajuanCuti));
         responseData.getMessages().add("insert sukses");
         return ResponseEntity.ok(responseData);
     }
@@ -48,4 +49,9 @@ public class DetailPengajuanCutiController {
         responseData.getMessages().add("update sukses");
         return ResponseEntity.ok(responseData);
     }
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        detailPengajuanCutiService.remove(id);
+    }
+
 }
