@@ -36,4 +36,16 @@ public class PengajuanCutiController {
 //        responseData.setPayLoad();
         return ResponseEntity.ok(responseData);
     }
+
+    @PutMapping("/updatePengajuanCuti")
+    public ResponseEntity<ResponseData<PengajuanCuti>> update(@RequestBody PengajuanCutiDto pengajuanCutiDto){
+        ResponseData<PengajuanCuti> responseData = new ResponseData<>();
+
+        PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
+
+        responseData.setStatus(true);
+        pengajuanCutiService.save(pengajuanCuti);
+//        responseData.setPayLoad();
+        return ResponseEntity.ok(responseData);
+    }
 }
