@@ -22,4 +22,14 @@ public class PengajuanCutiService {
     public Iterable<PengajuanCuti> findALl(){
         return pengajuanCutiRepo.findAll();
     }
+
+    public PengajuanCuti save(PengajuanCuti pengajuanCuti){
+        if (pengajuanCuti.getPengajuanCutiId() != null){
+            PengajuanCuti currentPengajuanCuti = pengajuanCutiRepo.findById(pengajuanCuti.getPengajuanCutiId()).get();
+            modelMapper.map(pengajuanCuti, currentPengajuanCuti);
+//            currentLibur.set(category.getName());
+            pengajuanCuti = currentPengajuanCuti;
+        }
+        return pengajuanCutiRepo.save(pengajuanCuti);
+    }
 }
