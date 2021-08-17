@@ -20,8 +20,13 @@ public class LiburController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<Libur> findAll(){
-        return liburService.findALl();
+    public Iterable<Libur> findAll(@RequestParam(value = "isDeletede", required = false, defaultValue = "false") boolean isDeleted){
+        return liburService.findALl(isDeleted);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        liburService.remove(id);
     }
 
     @PostMapping("/insertLibur")
