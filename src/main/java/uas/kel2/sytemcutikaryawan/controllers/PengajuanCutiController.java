@@ -8,6 +8,7 @@ import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.models.HakCuti;
+import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.HakCutiService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
@@ -22,7 +23,13 @@ public class PengajuanCutiController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<PengajuanCuti> findAll(){ return pengajuanCutiService.findALl();
+    public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
+        return pengajuanCutiService.findALl(isDeleted);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        pengajuanCutiService.remove(id);
     }
 
     @PostMapping("/insertPengajuanCuti")

@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
@@ -12,6 +16,9 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE tbl_pengajuan_cuti SET is_deleted = true WHERE pengajuan_cuti_id = ?")
+@FilterDef(name = "deletedPengajuanCutiFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
+@Filter(name = "deletedPengajuanCutiFilter", condition = "is_deleted = :isDeleted")
 public class PengajuanCuti {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
