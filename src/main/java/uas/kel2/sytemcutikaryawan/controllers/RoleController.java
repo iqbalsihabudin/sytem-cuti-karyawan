@@ -1,21 +1,15 @@
 package uas.kel2.sytemcutikaryawan.controllers;
 
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uas.kel2.sytemcutikaryawan.dto.LiburDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.dto.RoleDto;
-import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.Role;
-import uas.kel2.sytemcutikaryawan.service.LiburService;
 import uas.kel2.sytemcutikaryawan.service.RoleService;
 
-import javax.servlet.ServletOutputStream;
-import java.net.SocketOption;
 
 @RestController
 @RequestMapping("/api/role")

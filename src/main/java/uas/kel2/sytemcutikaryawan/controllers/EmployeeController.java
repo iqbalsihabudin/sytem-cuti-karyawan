@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.EmployeeDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.models.Employee;
+import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 
 @RestController
@@ -23,20 +24,32 @@ public class EmployeeController {
         ResponseData<Employee> response = new ResponseData<>();
         Employee employee = modelMapper.map(employeeDto, Employee.class);
         response.setPayLoad(employeeService.registerEmployee(employee));
+        System.out.println(employeeDto.getDivisi());
         response.setStatus(true);
         response.getMessages().add("employee saved!!");
         return ResponseEntity.ok(response);
 
     }
 
-    @GetMapping("/cek")
-    public String cek(){
-        return "selamat";
+    @PutMapping("/updateEmployee")
+    public ResponseEntity<ResponseData<Employee>> update(@RequestBody EmployeeDto employeeDto){
+        ResponseData<Employee> response = new ResponseData<>();
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        response.setPayLoad(employeeService.registerEmployee(employee));
+        System.out.println(employeeDto.getDivisi());
+        response.setStatus(true);
+        response.getMessages().add("employee update!!");
+        return ResponseEntity.ok(response);
+
     }
 
     @GetMapping("/findAll")
-    public Iterable<Employee> findAll(){
-        return employeeService.findALl();
+    public Iterable<Employee> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
+        return employeeService.findALl(isDeleted);
+    }
 
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        employeeService.remove(id);
     }
 }
