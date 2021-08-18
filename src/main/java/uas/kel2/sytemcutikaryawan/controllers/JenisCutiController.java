@@ -19,8 +19,13 @@ public class JenisCutiController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<JenisCuti> findAll(){
-        return jenisCutiService.findALl();
+    public Iterable<JenisCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
+        return jenisCutiService.findALl(isDeleted);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Integer id){
+        jenisCutiService.remove(id);
     }
 
     @PostMapping("insertJenisCuti")

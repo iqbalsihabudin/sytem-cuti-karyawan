@@ -20,7 +20,7 @@ public class LiburController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<Libur> findAll(@RequestParam(value = "isDeletede", required = false, defaultValue = "false") boolean isDeleted){
+    public Iterable<Libur> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         return liburService.findALl(isDeleted);
     }
 

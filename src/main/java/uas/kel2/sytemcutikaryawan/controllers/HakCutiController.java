@@ -20,7 +20,7 @@ public class HakCutiController {
     private ModelMapper modelMapper;
 
     @GetMapping("/findAll")
-    public Iterable<HakCuti> findAll(@RequestParam(value = "isDeletede", required = false, defaultValue = "false") boolean isDeleted){
+    public Iterable<HakCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         return hakCutiService.findALl(isDeleted);
     }
     @DeleteMapping("/{id}")
