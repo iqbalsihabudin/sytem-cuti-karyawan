@@ -24,7 +24,7 @@ public class JenisCuti {
     private Integer jenisCutiId;
     @Column(name = "jenis_cuti",length = 18)
     private String jenisCuti;
-    @Column(name = "deskripsi",length = 100)
+    @Column(name = "deskripsi")
     private String deskripsi;
     @Column(name = "is_deleted")
     private Boolean deleted = Boolean.FALSE;
