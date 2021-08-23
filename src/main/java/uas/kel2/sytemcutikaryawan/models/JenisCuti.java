@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "tbl_jenis_cuti")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor 
 @SQLDelete(sql = "UPDATE tbl_jenis_cuti SET is_deleted = true WHERE jenis_cuti_id = ?")
 @FilterDef(name = "deletedJenisCutiFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedJenisCutiFilter", condition = "is_deleted = :isDeleted")
