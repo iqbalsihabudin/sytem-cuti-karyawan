@@ -10,8 +10,8 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
     Optional<Employee> findByUsername(String username);
 
-
-  
+    @Query("SELECT COUNT(u)  FROM Employee u WHERE u.deleted = false AND u.role.roleId = 2")
+    public Integer employeeCount();
 
 
 }
