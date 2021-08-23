@@ -73,4 +73,8 @@ public class EmployeeService implements UserDetailsService {
         employeeRepo.deleteById(id);
     }
 
+    public Integer employeeCount(){
+        return employeeRepo.employeeCount();
+    }
+
 }

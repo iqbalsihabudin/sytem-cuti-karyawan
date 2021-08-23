@@ -19,6 +19,11 @@ public class EmployeeController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @GetMapping("/employeeCount")
+    public Integer jumlah(){
+        return employeeService.employeeCount();
+    }
+
     @PostMapping("/register")
     public ResponseEntity<ResponseData<Employee>> register(@RequestBody EmployeeDto employeeDto){
         ResponseData<Employee> response = new ResponseData<>();
