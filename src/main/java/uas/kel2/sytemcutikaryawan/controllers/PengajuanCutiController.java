@@ -55,4 +55,14 @@ public class PengajuanCutiController {
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         return ResponseEntity.ok(responseData);
     }
+
+    @GetMapping("/countOpenpc")
+    public Integer countOpenpc(){
+        return pengajuanCutiService.PengajuanCutiCountOpen();
+    }
+
+    @GetMapping("/countAllpc")
+    public Integer countAllpc(){
+        return pengajuanCutiService.PengajuanCutiCountAll();
+    }
 }
