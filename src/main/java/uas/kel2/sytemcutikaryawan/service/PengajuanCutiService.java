@@ -52,4 +52,8 @@ public class PengajuanCutiService {
         }
         return pengajuanCutiRepo.save(pengajuanCuti);
     }
+
+    public Integer PengajuanCutiCountOpen(){
+        return pengajuanCutiRepo.pengajuanCutiCount();
+    }
 }
