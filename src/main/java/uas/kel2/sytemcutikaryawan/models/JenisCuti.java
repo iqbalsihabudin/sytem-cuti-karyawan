@@ -18,7 +18,7 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE tbl_jenis_cuti SET is_deleted = true WHERE jenis_cuti_id = ?")
 @FilterDef(name = "deletedJenisCutiFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedJenisCutiFilter", condition = "is_deleted = :isDeleted")
-public class JenisCuti {
+public class JenisCuti extends BaseEntity<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer jenisCutiId;

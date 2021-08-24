@@ -19,7 +19,7 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE tbl_hak_cuti SET is_deleted = true WHERE hak_cuti_id = ?")
 @FilterDef(name = "deletedHakCutiFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedHakCutiFilter", condition = "is_deleted = :isDeleted")
-public class HakCuti {
+public class HakCuti extends BaseEntity<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer hakCutiId;

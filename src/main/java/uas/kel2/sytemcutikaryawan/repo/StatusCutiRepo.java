@@ -6,4 +6,5 @@ import uas.kel2.sytemcutikaryawan.models.StatusCuti;
 
 public interface StatusCutiRepo extends JpaRepository<StatusCuti, Integer> {
 
+    public StatusCuti findStatusCutiByStatusCutiId(Integer id);
 }

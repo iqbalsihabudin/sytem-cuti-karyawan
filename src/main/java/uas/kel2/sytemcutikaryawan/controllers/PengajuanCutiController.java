@@ -47,9 +47,10 @@ public class PengajuanCutiController {
     @PutMapping("/updatePengajuanCuti")
     public ResponseEntity<ResponseData<PengajuanCuti>> update(@RequestBody PengajuanCutiDto pengajuanCutiDto){
         ResponseData<PengajuanCuti> responseData = new ResponseData<>();
-
+        PengajuanCuti tamp = pengajuanCutiService.findById(pengajuanCutiDto.getPengajuanCutiId());
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
-
+        pengajuanCuti.setCreatedBy(tamp.getCreatedBy());
+        pengajuanCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("update sukses");
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));

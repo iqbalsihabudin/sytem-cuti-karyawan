@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.Role;
+import uas.kel2.sytemcutikaryawan.models.StatusCuti;
 import uas.kel2.sytemcutikaryawan.repo.RoleRepo;
 
 import javax.persistence.EntityManager;
@@ -43,5 +44,9 @@ public class RoleService {
             role = currentRole;
         }
         return roleRepo.save(role);
+    }
+
+    public Role findById(Integer id){
+        return roleRepo.findByRoleId(id);
     }
 }

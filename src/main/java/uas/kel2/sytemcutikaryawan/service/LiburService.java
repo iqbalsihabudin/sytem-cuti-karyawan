@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.Libur;
+import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.repo.LiburRepo;
 
 import javax.persistence.EntityManager;
@@ -43,6 +44,10 @@ public class LiburService {
             libur = currentLibur;
         }
         return liburRepo.save(libur);
+    }
+
+    public Libur findById(Integer id){
+        return liburRepo.findByLiburId(id);
     }
 
 

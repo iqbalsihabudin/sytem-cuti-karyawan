@@ -45,9 +45,10 @@ public class RoleController {
     @PutMapping("/updateRole")
     public ResponseEntity<ResponseData<Role>> update(@RequestBody RoleDto roleDto){
         ResponseData<Role> responseData = new ResponseData<>();
-
+        Role tamp = roleService.findById(roleDto.getRoleId());
         Role role = modelMapper.map(roleDto, Role.class);
-
+        role.setCreatedBy(tamp.getCreatedBy());
+        role.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("update sukses");
         responseData.setPayLoad(roleService.save(role));

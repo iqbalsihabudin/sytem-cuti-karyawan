@@ -45,4 +45,8 @@ public class DetailPengajuanCutiService {
     public void remove(Integer id){
         detailPengajuanCutiRepo.deleteById(id);
     }
+
+    public DetailPengajuanCuti findById(Integer id){
+        return detailPengajuanCutiRepo.findByDetailPengajuanCutiId(id);
+    }
 }

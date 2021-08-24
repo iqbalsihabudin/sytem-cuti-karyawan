@@ -47,4 +47,9 @@ public class StatusCutiService {
         }
         return statusCutiRepo.save(statusCuti);
     }
+
+    public StatusCuti findById(Integer id){
+        return statusCutiRepo.findStatusCutiByStatusCutiId(id);
+    }
+
 }

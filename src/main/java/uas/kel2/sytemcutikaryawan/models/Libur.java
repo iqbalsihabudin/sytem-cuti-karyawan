@@ -19,7 +19,7 @@ import java.util.Date;
 @SQLDelete(sql = "UPDATE tbl_libur SET is_deleted = true WHERE libur_id = ?")
 @FilterDef(name = "deletedLiburFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedLiburFilter", condition = "is_deleted = :isDeleted")
-public class Libur {
+public class Libur extends BaseEntity<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "libur_id")

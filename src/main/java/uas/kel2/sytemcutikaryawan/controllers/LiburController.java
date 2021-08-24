@@ -44,9 +44,10 @@ public class LiburController {
     @PutMapping("/updateLibur")
     public ResponseEntity<ResponseData<Libur>> update(@RequestBody LiburDto liburDto){
         ResponseData<Libur> responseData = new ResponseData<>();
-
+        Libur tamp = liburService.findById(liburDto.getLiburId());
         Libur libur = modelMapper.map(liburDto, Libur.class);
-
+        libur.setCreatedBy(tamp.getCreatedBy());
+        libur.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("update sukses");
         responseData.setPayLoad(liburService.save(libur));
