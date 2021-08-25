@@ -27,4 +27,10 @@ public class DashboardControllers {
         return "Dashboard";
     }
 
+    @GetMapping("/Profile")
+    String user(Model model){
+
+        return "user";
+    }
+
 }

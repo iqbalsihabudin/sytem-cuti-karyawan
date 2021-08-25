@@ -2,28 +2,76 @@
 <!doctype html>
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  lang="en">
 <head>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/faces/office-building.png">
+    <link rel="icon" type="image/png" href="/assets/img/faces/office-building.png">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 
     <link rel="stylesheet" href="webjars/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="/css/material-dashboard.css">
-    <link rel="stylesheet" href="/css/demo.css">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+    <link rel="stylesheet" href="/css/dashboard.min.css?v=2.1.2"/>
+    <link href="/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">-->
 
     <title>Dashboard</title>
 </head>
 <body >
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="javascript:save()" id="save">
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="nip" class="form-label">Nip</label>
+                        <input type="text" class="form-control" id="nip" required>
+                    </div>
+                    <div class="mb-1">
+                        <label for="namaLengkap" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="namaLengkap" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="divisi" class="form-label">Division</label>
+                        <input type="text" class="form-control" id="divisi" required>
+                    </div>
+                    <div class="mb-1">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                    <div class="mb-1">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
         <!--
@@ -37,13 +85,13 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item active  ">
-                    <a class="nav-link" href="./dashboard.html">
+                    <a class="nav-link" href="/Dashboard">
                         <i class="material-icons">dashboard</i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="./user.html">
+                    <a class="nav-link" href="/Profile">
                         <i class="material-icons">person</i>
                         <p>Profile</p>
                     </a>
@@ -65,7 +113,7 @@
         </div>
     </div>
     <div class="main-panel">
-        <!-- Navbar -->
+        <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
@@ -97,9 +145,9 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">notifications</i>
-                                <span class="notification">5</span>
+                                <span class="notification RequestLeavein" ></span>
                                 <p class="d-lg-none d-md-block">
                                     Some Actions
                                 </p>
@@ -120,10 +168,10 @@
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="/Profile">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Log out</a>
+                                <a class="dropdown-item" href="/logout">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -131,8 +179,13 @@
             </div>
         </nav>
         <!-- End Navbar -->
+
         <div class="content">
             <div class="container-fluid">
+                <div class="alert alert-info " id="notif" role="alert" style="display: none">
+                    successfully added <a href="#" class="alert-link">
+                    click here </a>for more information.
+                </div>
                 <div class="row">
 
 
@@ -192,7 +245,7 @@
                                     <i class="far fa-question-circle"></i>
                                 </div>
                                 <p class="card-category">Request For Leave</p>
-                                <h3 class="card-title">+245</h3>
+                                <h3 class="card-title RequestLeavein"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -229,7 +282,25 @@
 
                                             </tbody>
                                         </table>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -238,33 +309,17 @@
                         <div class="card">
                             <div class="card-header card-header-warning">
                                 <div class="row justify-content-center">
-                                    <div class="col-10">
+                                    <div class="col-9">
                                         <h4 class="card-title">Employees</h4>
                                         <p class="card-category">Employee list has been updated</p>
                                     </div>
                                     <div class="col-2">
-                                        <button type="button" class="btn btn-outline-light " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i class="fas fa-plus-square fa-2x"></i>
+                                        <button type="button" class="btn btn-outline-warning btn-link btn" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                                            <i class="fas fa-plus-square fa-1x" style="color: whitesmoke;"></i>
                                         </button>
                                     </div>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body table-responsive">
@@ -280,7 +335,25 @@
 
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -322,54 +395,17 @@
         </footer>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="webjars/jquery/3.2.0/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap-material-design.min.js"></script>
 
-<!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap-material-design.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Plugin for the momentJs  -->
-<script src="../assets/js/plugins/moment.min.js"></script>
-<!--  Plugin for Sweet Alert -->
-<script src="../assets/js/plugins/sweetalert2.js"></script>
-<!-- Forms Validations Plugin -->
-<script src="../assets/js/plugins/jquery.validate.min.js"></script>
-<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-<script src="../assets/js/plugins/bootstrap-selectpicker.js"></script>
-<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="../assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-<script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
-<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
-<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<script src="../assets/js/plugins/fullcalendar.min.js"></script>
-<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../assets/js/plugins/nouislider.min.js"></script>
-<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-<!-- Library for adding dinamically elements -->
-<script src="../assets/js/plugins/arrive.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chartist JS -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/demo/demo.js"></script>
 <script>
     tampilkanEmployee();
     tampilkanRequestLeave();
     EmployeeCount();
+    RequestLeaveCount();
     function EmployeeCount() {
         fetch('/api/employee/employeeCount')
             .then(response => response.json())
@@ -378,6 +414,21 @@
                 const tbody = document.getElementById('countEmployee');
 
                 tbody.innerHTML += data
+
+
+            });
+    }
+    function RequestLeaveCount() {
+        fetch('/api/pengajuanCuti/countOpenpc')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const tbody = document.getElementsByClassName('RequestLeavein');
+                var i;
+                for (i = 0; i < tbody.length; i++) {
+                    tbody[i].innerHTML += data;
+                }
+
 
 
             });
@@ -393,7 +444,7 @@
                 function showTable(employee) {
                     if (employee.role.roleId == '2'){
                         tbody.innerHTML += `<td>` + employee.employee_id + `</td>
-                            <td>` + employee.namaLengkap + `</td>
+                            <td> ` + employee.namaLengkap + `</td>
                             <td>` + employee.divisi + `</td>
                             <td>` + employee.email + `</td>`
                     }
@@ -425,6 +476,44 @@
                 }
             });
     }
+    const formSave = document.getElementById('save');
+    const tbody = document.getElementById('tbody');
+    const myModal = document.getElementById('exampleModal')
+
+    async function save() {
+        alert('huu');
+        await fetch('api/employee/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'nip': formSave.nip.value,
+                'namaLengkap': formSave.namaLengkap.value,
+                'divisi': formSave.divisi.value,
+                'email': formSave.email.value,
+                'username': formSave.username.value,
+                'password': formSave.password.value,
+                'role' : {
+                    "roleId": 2
+                }
+            })
+        })
+            .then(response => {
+                $('#exampleModal').modal('toggle');
+                document.getElementById('notif').style.display = 'block'
+                setTimeout(function(){
+                    document.getElementById('notif').style.display = 'none' ;
+                }, 3000);
+            });
+        tbody.innerHTML = '';
+        tampilkanEmployee();
+    }
+    const btn = document.getElementById('close');
+    btn.addEventListener('click',function () {
+        alert('asdasd');
+        myModal.toggle();
+    });
 
     $(document).ready(function() {
         $().ready(function() {
@@ -596,23 +685,6 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        md.initDashboardPageCharts();
 
-    });
-</script>
-
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
--->
 </body>
 </html>
