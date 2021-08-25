@@ -12,4 +12,6 @@ public interface PengajuanCutiRepo extends JpaRepository<PengajuanCuti, Integer>
     @Query("SELECT COUNT(e) from PengajuanCuti e WHERE e.deleted=FALSE AND e.statusCuti.statusCutiId<>1")
     public Integer pengajuanCutiCountAll();
 
+    public PengajuanCuti findByPengajuanCutiId(Integer id);
+
 }

@@ -10,6 +10,9 @@ import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 
+import java.security.Principal;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeController {
@@ -56,5 +59,11 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public void removeOne(@PathVariable("id") Integer id){
         employeeService.remove(id);
+    }
+
+    @GetMapping("/userLogin")
+    public Optional<Employee> userLogin(Principal p){
+        Employee employee = employeeService.userLogin(p);
+        return Optional.of(employee);
     }
 }

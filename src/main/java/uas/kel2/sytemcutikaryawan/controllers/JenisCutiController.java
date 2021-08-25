@@ -43,9 +43,10 @@ public class JenisCutiController {
     @PutMapping("updateJenisCuti")
     public ResponseEntity<ResponseData<JenisCuti>> update(@RequestBody JenisCutiDto jenisCutiDto){
         ResponseData<JenisCuti> responseData = new ResponseData<>();
-
+        JenisCuti tamp = jenisCutiService.findById(jenisCutiDto.getJenisCutiId());
         JenisCuti jenisCuti = modelMapper.map(jenisCutiDto, JenisCuti.class);
-
+        jenisCuti.setCreatedBy(tamp.getCreatedBy());
+        jenisCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("insert sukses");
         responseData.setPayLoad(jenisCutiService.save(jenisCuti));

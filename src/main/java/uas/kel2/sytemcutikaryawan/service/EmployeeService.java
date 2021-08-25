@@ -18,6 +18,8 @@ import uas.kel2.sytemcutikaryawan.utis.PasswordEncoder;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.security.Principal;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -75,6 +77,10 @@ public class EmployeeService implements UserDetailsService {
 
     public Integer employeeCount(){
         return employeeRepo.employeeCount();
+    }
+
+    public Employee userLogin(Principal p){
+        return employeeRepo.findByUsername(p.getName()).get();
     }
 
 }

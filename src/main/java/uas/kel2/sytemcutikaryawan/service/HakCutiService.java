@@ -47,4 +47,8 @@ public class HakCutiService {
         }
         return hakCutiRepo.save(hakCuti);
     }
+
+    public HakCuti findById(Integer id){
+        return hakCutiRepo.findByHakCutiId(id);
+    }
 }

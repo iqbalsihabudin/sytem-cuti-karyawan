@@ -43,9 +43,10 @@ public class HakCutiController {
     @PutMapping("/updateHakCuti")
     public ResponseEntity<ResponseData<HakCuti>> update(@RequestBody HakCutiDto hakCutiDto){
         ResponseData<HakCuti> responseData = new ResponseData<>();
-
+        HakCuti tamp = hakCutiService.findById(hakCutiDto.getHakCutiId());
         HakCuti hakCuti = modelMapper.map(hakCutiDto, HakCuti.class);
-
+        hakCuti.setCreatedBy(tamp.getCreatedBy());
+        hakCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("update sukses");
         responseData.setPayLoad(hakCutiService.save(hakCuti));

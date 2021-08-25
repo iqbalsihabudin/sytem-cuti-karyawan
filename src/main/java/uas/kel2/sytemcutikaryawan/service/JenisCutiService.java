@@ -46,4 +46,8 @@ public class JenisCutiService {
         }
         return jenisCutiRepo.save(jenisCuti);
     }
+
+    public JenisCuti findById(Integer id){
+        return jenisCutiRepo.findByJenisCutiId(id);
+    }
 }

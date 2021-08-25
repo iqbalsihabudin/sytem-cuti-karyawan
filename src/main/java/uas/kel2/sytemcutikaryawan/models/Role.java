@@ -21,7 +21,7 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE tbl_role SET is_deleted = true WHERE role_id = ?")
 @FilterDef(name = "deletedRoleFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedRoleFilter", condition = "is_deleted = :isDeleted")
-public class Role {
+public class Role extends BaseEntity<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")

@@ -46,9 +46,10 @@ public class StatusCutiController {
     @PutMapping("updateStatusCuti")
     public ResponseEntity<ResponseData<StatusCuti>> update(@RequestBody StatusCutiDto statusCutiDto){
         ResponseData<StatusCuti> responseData = new ResponseData<>();
-
+        StatusCuti tamp = statusCutiService.findById(statusCutiDto.getStatusCutiId());
         StatusCuti statusCuti = modelMapper.map(statusCutiDto, StatusCuti.class);
-
+        statusCuti.setCreatedBy(tamp.getCreatedBy());
+        statusCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         responseData.getMessages().add("update sukses");
         responseData.setPayLoad(statusCutiService.save(statusCuti));

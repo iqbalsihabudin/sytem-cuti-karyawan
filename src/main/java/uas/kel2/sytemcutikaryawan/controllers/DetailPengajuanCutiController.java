@@ -38,12 +38,13 @@ public class DetailPengajuanCutiController {
         return ResponseEntity.ok(responseData);
     }
 
-    @PutMapping("/updateDetailPengajuanCuti")
+    @PutMapping("/")
     public ResponseEntity<ResponseData<DetailPengajuanCuti>> update(@RequestBody DetailPengajuanCutiDto detailPengajuanCutiDto){
         ResponseData<DetailPengajuanCuti> responseData = new ResponseData<>();
-
+        DetailPengajuanCuti tamp = detailPengajuanCutiService.findById(detailPengajuanCutiDto.getDetailPengajuanCutiId());
         DetailPengajuanCuti detailPengajuanCuti = modelMapper.map(detailPengajuanCutiDto, DetailPengajuanCuti.class);
-
+        detailPengajuanCuti.setCreatedBy(tamp.getCreatedBy());
+        detailPengajuanCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setStatus(true);
         detailPengajuanCutiService.save(detailPengajuanCuti);
         responseData.getMessages().add("update sukses");

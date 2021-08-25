@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.HakCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
+import uas.kel2.sytemcutikaryawan.models.Role;
 import uas.kel2.sytemcutikaryawan.repo.HakCutiRepo;
 import uas.kel2.sytemcutikaryawan.repo.PengajuanCutiRepo;
 
@@ -47,7 +48,6 @@ public class PengajuanCutiService {
         if (pengajuanCuti.getPengajuanCutiId() != null){
             PengajuanCuti currentPengajuanCuti = pengajuanCutiRepo.findById(pengajuanCuti.getPengajuanCutiId()).get();
             modelMapper.map(pengajuanCuti, currentPengajuanCuti);
-//            currentLibur.set(category.getName());
             pengajuanCuti = currentPengajuanCuti;
         }
         return pengajuanCutiRepo.save(pengajuanCuti);
@@ -59,5 +59,9 @@ public class PengajuanCutiService {
 
     public Integer PengajuanCutiCountAll(){
         return pengajuanCutiRepo.pengajuanCutiCountAll();
+    }
+
+    public PengajuanCuti findById(Integer id){
+        return pengajuanCutiRepo.findByPengajuanCutiId(id);
     }
 }

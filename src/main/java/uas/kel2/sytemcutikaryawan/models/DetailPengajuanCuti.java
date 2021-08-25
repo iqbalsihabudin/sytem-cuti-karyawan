@@ -20,7 +20,7 @@ import java.util.Date;
 @SQLDelete(sql = "UPDATE tbl_detail_pengajual_cuti SET is_deleted = true WHERE detail_pengajuan_cuti_id = ?")
 @FilterDef(name = "deletedDetPengajuanFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedDetPengajuanFilter", condition = "is_deleted = :isDeleted")
-public class DetailPengajuanCuti {
+public class DetailPengajuanCuti extends BaseEntity<String>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
