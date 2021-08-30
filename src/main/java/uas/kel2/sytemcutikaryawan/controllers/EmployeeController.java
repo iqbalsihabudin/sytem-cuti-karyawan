@@ -2,15 +2,21 @@ package uas.kel2.sytemcutikaryawan.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.EmployeeDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
+import uas.kel2.sytemcutikaryawan.dto.SandiDto;
 import uas.kel2.sytemcutikaryawan.models.Employee;
-import uas.kel2.sytemcutikaryawan.models.Libur;
+import uas.kel2.sytemcutikaryawan.service.EmailService;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +28,12 @@ public class EmployeeController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    EmailService emailService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @GetMapping("/employeeCount")
     public Integer jumlah(){
         return employeeService.employeeCount();
@@ -29,13 +41,20 @@ public class EmployeeController {
 
     @PostMapping("/register")
     public ResponseEntity<ResponseData<Employee>> register(@RequestBody EmployeeDto employeeDto){
+        String pass = "123";
         ResponseData<Employee> response = new ResponseData<>();
+        Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Employee employee = modelMapper.map(employeeDto, Employee.class);
+        employee.setPassword(pass);
         response.setPayLoad(employeeService.registerEmployee(employee));
-        System.out.println(employeeDto.getDivisi());
+        String text = "Akun anda telah Berhasil di buat \n" +
+                "username : "+employee.getUsername() +"\n" +
+                "password : "+pass;
+        emailService.sendEmail(user.getEmail(), employee.getEmail(),"succes create email", text);
         response.setStatus(true);
         response.getMessages().add("employee saved!!");
         return ResponseEntity.ok(response);
+
 
     }
 
@@ -48,7 +67,6 @@ public class EmployeeController {
         response.setStatus(true);
         response.getMessages().add("employee update!!");
         return ResponseEntity.ok(response);
-
     }
 
     @GetMapping("/findAllByLimit")
@@ -70,5 +88,40 @@ public class EmployeeController {
     public Optional<Employee> userLogin(Principal p){
         Employee employee = employeeService.userLogin(p);
         return Optional.of(employee);
+    }
+
+    @GetMapping("/coba")
+    public String user(){
+        Employee a = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String text = "Akun anda telah Berhasil di buat \n" +
+                "username : "+a.getUsername() +"\n" +
+                "password : "+a.getPassword();
+//        String text = "";
+        return text;
+    }
+
+
+    @PostMapping("/changePassword")
+    public Map<String, Object> changePassword(@RequestBody SandiDto sandi){
+        HashMap<String, Object> response= new HashMap<>();
+        try {
+            Employee a = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (bCryptPasswordEncoder.matches(sandi.getOldSandi(), a.getPassword())){
+                a.setPassword(sandi.getNewSandi());
+                employeeService.registerEmployee(a);
+                response.put("message","sukses mengganti password");
+                response.put("success",true);
+                return response;
+            }else {
+                response.put("message","sandi salah");
+                response.put("success",false);
+                return response;
+            }
+        }catch (Exception e){
+            response.put("message ",e.getMessage());
+            response.put("success",false);
+            return response;
+
+        }
     }
 }
