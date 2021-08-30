@@ -11,15 +11,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.Employee;
-import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.repo.EmployeeRepo;
-import uas.kel2.sytemcutikaryawan.repo.LiburRepo;
-import uas.kel2.sytemcutikaryawan.utis.PasswordEncoder;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.security.Principal;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -50,10 +46,17 @@ public class EmployeeService implements UserDetailsService {
     public Employee registerEmployee(Employee user){
 
         boolean userExists = employeeRepo.findByUsername(user.getUsername()).isPresent();
-        if (userExists){
-            throw new RuntimeException(
-                    String.format("user with username '%s' already exists",user.getUsername())
-            );
+        if(user.getEmployee_id() != null){
+            System.out.println("update");
+            Employee currentEmployee = employeeRepo.findById(user.getEmployee_id()).get();
+            modelMapper.map(user, currentEmployee);
+            user = currentEmployee;
+        }else {
+            if (userExists){
+                throw new RuntimeException(
+                        String.format("user with username '%s' already exists",user.getUsername())
+                );
+            }
         }
 
         String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
