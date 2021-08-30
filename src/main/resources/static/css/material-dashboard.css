@@ -19678,6 +19678,10 @@ Copyright (c) 2015 Daniel Eden
     z-index: 9999;
     overflow-x: hidden;
   }
+  .card .card-body .sosmed a {
+    color: #919191;
+    transition: 0.3s;
+  }
 
   .social-line .btn {
     margin: 0 0 10px 0;

@@ -1,0 +1,311 @@
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/faces/office-building.png">
+  <link rel="icon" type="image/png" href="/assets/img/faces/office-building.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Profile
+  </title>
+  <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" href="webjars/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/icofont.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="/css/style.css" rel="stylesheet" />
+
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+      <div class="logo"><a href="/Dashboard" class="simple-text logo-normal">
+        <lord-icon
+                src="https://cdn.lordicon.com/vlupvdhl.json"
+                trigger="hover"
+                colors="primary:#121331,secondary:#a866ee"
+                axis-x="50"
+                style="width:180px;height:180px">
+        </lord-icon>
+        <br>
+          Group 2
+        </a></div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item   ">
+            <a class="nav-link" href="/Dashboard">
+              <lord-icon
+                      src="https://cdn.lordicon.com/jvucoldz.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/Profile">
+              <lord-icon
+                      src="https://cdn.lordicon.com/dxjqoygy.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Profile
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="/RequestLeave">
+              <lord-icon
+                      src="https://cdn.lordicon.com/puvaffet.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Request Leave
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/AboutUs">
+              <lord-icon
+                      src="https://cdn.lordicon.com/nobciafz.json"
+                      trigger="hover"
+                      colors="primary:#ffffff,secondary:#ffffff"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              About Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">About Us</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <lord-icon
+                          src="https://cdn.lordicon.com/msoeawqm.json"
+                          trigger="hover"
+                          colors="primary:#121331,secondary:#a866ee"
+                          style="width:35px;height:35px">
+                  </lord-icon>
+                  <div class="ripple-container"></div>
+                </button>
+              </div>
+            </form>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="/Profile">Profile</a>
+                  <a class="dropdown-item" href="#">Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/logout">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="section-title">
+          <span style="color: #e3e2e2">Team</span>
+          <h2>Team</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="container-fluid">
+
+              <div class="card" >
+                <img src="/assets/img/faces/Dio.jpg" data-holder-rendered="true" style="max-width: 60%;margin-top:30px; margin-left:45px" class="rounded-circle z-depth-2" alt="100x100" >
+                <div class="card-body text-center" >
+
+                  <h4>Dio Prasetiyo</h4>
+
+                  <div class="sosmed-team" >
+                    <a href="https://github.com/Dayo21Dev" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/dioprasetiyo21" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/dioprasetiyo21" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/dioprasetiyo21" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="container-fluid">
+
+              <div class="card" >
+                <img src="/assets/img/faces/Iqbal.jpg" data-holder-rendered="true" style="max-width: 60%;margin-top:30px; margin-left:45px" class="rounded-circle z-depth-2" alt="100x100" >
+                <div class="card-body text-center" >
+
+                  <h4>Iqbal Sihabudin</h4>
+
+                  <div class="sosmed-team" >
+                    <a href="https://github.com/iqbalsihabudin" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/iqbal.sihabudin.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iqbal_shhihab" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="container-fluid">
+
+              <div class="card" >
+                <img src="/assets/img/faces/Putri.jpg" data-holder-rendered="true" style="max-width: 60%;margin-top:30px; margin-left:45px" class="rounded-circle z-depth-2" alt="100x100" >
+                <div class="card-body text-center" >
+
+                  <h4>Putri Melenia</h4>
+
+                  <div class="sosmed-team" >
+                    <a href="https://github.com/lailaJong" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://facebook.com/putri.melenia.5" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/putrimeleee" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="container-fluid">
+
+              <div class="card" >
+                <img src="/assets/img/faces/Hera.jpg" data-holder-rendered="true" style="max-width: 60%;margin-top:30px; margin-left:45px" class="rounded-circle z-depth-2" alt="100x100" >
+                <div class="card-body text-center" >
+
+                  <h4>Hera Elvira</h4>
+
+                  <div class="sosmed-team" >
+                    <a href="https://github.com/heraelvira12" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://facebook.com/hera.elvira.3" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/heraelvira12" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="#">
+                  Group 2
+                </a>
+              </li>
+              <li>
+                <a href="/AboutUs">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/iqbalsihabudin/sytem-cuti-karyawan" target="_blank">
+                  Github
+                </a>
+              </li>
+
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, UAS Java Lanjutan <i class="material-icons">favorite</i> by Group 2
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script type="text/javascript" src="webjars/jquery/3.2.0/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap-material-design.min.js"></script>
+  <script src="/js/main.js"></script>
+
+  <script>
+
+
+  </script>
+</body>
+
+</html>

@@ -51,6 +51,11 @@ public class EmployeeController {
 
     }
 
+    @GetMapping("/findAllByLimit")
+    public  Iterable<Employee> findAllByLimit(@RequestParam(value = "start",defaultValue = "0") int start, @RequestParam(value = "limit",defaultValue = "5") int limit){
+        return employeeService.findAllByLimit(start,limit);
+    }
+
     @GetMapping("/findAll")
     public Iterable<Employee> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         return employeeService.findALl(isDeleted);

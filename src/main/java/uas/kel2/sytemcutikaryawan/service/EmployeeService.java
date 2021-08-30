@@ -83,4 +83,6 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepo.findByUsername(p.getName()).get();
     }
 
+    public Iterable<Employee> findAllByLimit(int start, int limit){return employeeRepo.findAllByLimit(start,limit);}
+
 }

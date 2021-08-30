@@ -9,6 +9,9 @@ import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
 
+import java.security.Principal;
+import java.util.Optional;
+
 @Controller
 public class DashboardControllers {
 
@@ -18,12 +21,17 @@ public class DashboardControllers {
     @Autowired
     private PengajuanCutiService pengajuanCutiService;
 
+    @Autowired
+    private EmployeeController employeeController;
+
     @GetMapping("/Dashboard")
-    String Dashboard(Model model){
+    String Dashboard(Model model, Principal principal){
+        Optional<Employee> userlogin = employeeController.userLogin(principal);
         Iterable<PengajuanCuti> cuti = pengajuanCutiService.findALl(false);
         Iterable<Employee> Karyawan = employeeService.findALl(false);
         model.addAttribute("Employee",Karyawan);
         model.addAttribute("cuti",cuti);
+        model.addAttribute("user",userlogin);
         return "Dashboard";
     }
 
@@ -31,6 +39,12 @@ public class DashboardControllers {
     String user(Model model){
 
         return "user";
+    }
+
+    @GetMapping("/AboutUs")
+    String AboutUs(Model model){
+
+        return "AboutUs";
     }
 
 }
