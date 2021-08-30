@@ -5,12 +5,10 @@ import org.hibernate.Session;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uas.kel2.sytemcutikaryawan.models.HakCuti;
-import uas.kel2.sytemcutikaryawan.models.Libur;
-import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
-import uas.kel2.sytemcutikaryawan.models.Role;
+import uas.kel2.sytemcutikaryawan.models.*;
 import uas.kel2.sytemcutikaryawan.repo.HakCutiRepo;
 import uas.kel2.sytemcutikaryawan.repo.PengajuanCutiRepo;
+import uas.kel2.sytemcutikaryawan.repo.StatusCutiRepo;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -23,6 +21,9 @@ public class PengajuanCutiService {
 
     @Autowired
     private PengajuanCutiRepo pengajuanCutiRepo;
+
+    @Autowired
+    private StatusCutiRepo statusCutiRepo;
 
     @Autowired
     private EntityManager entityManager;
@@ -38,6 +39,20 @@ public class PengajuanCutiService {
 
     public void remove(Integer id){
         pengajuanCutiRepo.deleteById(id);
+    }
+
+    public void updateStatusAcc(Integer id){
+        PengajuanCuti pengajuanCuti = pengajuanCutiRepo.getById(id);
+        StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(3);
+        pengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCutiRepo.save(pengajuanCuti);
+    }
+
+    public void updateStatusReject(Integer id){
+        PengajuanCuti pengajuanCuti = pengajuanCutiRepo.getById(id);
+        StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(4);
+        pengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCutiRepo.save(pengajuanCuti);
     }
 
     public Iterable<PengajuanCuti> findALl(){

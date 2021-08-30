@@ -13,6 +13,9 @@ import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.HakCutiService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/pengajuanCuti")
 public class PengajuanCutiController {
@@ -30,6 +33,36 @@ public class PengajuanCutiController {
     @DeleteMapping("/{id}")
     public void removeOne(@PathVariable("id") Integer id){
         pengajuanCutiService.remove(id);
+    }
+
+    @PutMapping("/acc/{id}")
+    public Map<String, Object> statusAcc(@PathVariable("id") Integer id){
+        HashMap<String, Object> response= new HashMap<>();
+        try {
+            pengajuanCutiService.updateStatusAcc(id);
+            response.put("message","Approved pengajuan berhasil");
+            response.put("success",true);
+            return response;
+        }catch (Exception e){
+            response.put("message ",e.getMessage());
+            response.put("success",false);
+            return response;
+        }
+    }
+
+    @PutMapping("/reject/{id}")
+    public Map<String, Object> statusReject(@PathVariable("id") Integer id){
+        HashMap<String, Object> response= new HashMap<>();
+        try {
+            pengajuanCutiService.updateStatusReject(id);
+            response.put("message","Approved pengajuan berhasil");
+            response.put("success",true);
+            return response;
+        }catch (Exception e){
+            response.put("message ",e.getMessage());
+            response.put("success",false);
+            return response;
+        }
     }
 
     @PostMapping("/insertPengajuanCuti")
