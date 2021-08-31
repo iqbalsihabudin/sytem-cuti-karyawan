@@ -49,7 +49,10 @@ public class EmployeeService implements UserDetailsService {
         if(user.getEmployee_id() != null){
             System.out.println("update");
             Employee currentEmployee = employeeRepo.findById(user.getEmployee_id()).get();
-            modelMapper.map(user, currentEmployee);
+            currentEmployee.setUsername(user.getUsername());
+            currentEmployee.setEmail(user.getEmail());
+            currentEmployee.setNamaLengkap(user.getNamaLengkap());
+            currentEmployee.setDivisi(user.getDivisi());
             user = currentEmployee;
         }else {
             if (userExists){
@@ -57,10 +60,10 @@ public class EmployeeService implements UserDetailsService {
                         String.format("user with username '%s' already exists",user.getUsername())
                 );
             }
+            String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+            user.setPassword(encondedPassword);
         }
 
-        String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encondedPassword);
         return employeeRepo.save(user);
     }
 

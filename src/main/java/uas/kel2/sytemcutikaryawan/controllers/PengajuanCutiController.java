@@ -3,13 +3,16 @@ package uas.kel2.sytemcutikaryawan.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
+import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.models.HakCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
+import uas.kel2.sytemcutikaryawan.service.EmailService;
 import uas.kel2.sytemcutikaryawan.service.HakCutiService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
 
@@ -24,6 +27,9 @@ public class PengajuanCutiController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
@@ -40,6 +46,12 @@ public class PengajuanCutiController {
         HashMap<String, Object> response= new HashMap<>();
         try {
             pengajuanCutiService.updateStatusAcc(id);
+            Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
+            String[] email = new String[1];
+            email[0] = pengajuanCuti.getEmployee().getEmail();
+            String text = "pengajuanmu telah di acc oleh hrd " +user.getNamaLengkap() +" ";
+            emailService.sendEmail(user.getEmail(), email,"acc", text);
             response.put("message","Approved pengajuan berhasil");
             response.put("success",true);
             return response;
@@ -50,12 +62,20 @@ public class PengajuanCutiController {
         }
     }
 
+
+
     @PutMapping("/reject/{id}")
     public Map<String, Object> statusReject(@PathVariable("id") Integer id){
         HashMap<String, Object> response= new HashMap<>();
         try {
             pengajuanCutiService.updateStatusReject(id);
-            response.put("message","Approved pengajuan berhasil");
+            Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
+            String[] email = new String[1];
+            email[0] = pengajuanCuti.getEmployee().getEmail();
+            String text = "pengajuanmu di tolak oleh hrd " +user.getNamaLengkap() +" ";
+            emailService.sendEmail(user.getEmail(), email,"tolak", text);
+            response.put("message","Pengajuan reject");
             response.put("success",true);
             return response;
         }catch (Exception e){

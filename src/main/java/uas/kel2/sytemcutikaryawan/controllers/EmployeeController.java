@@ -46,11 +46,13 @@ public class EmployeeController {
         Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Employee employee = modelMapper.map(employeeDto, Employee.class);
         employee.setPassword(pass);
+        String[] email = new String[1];
+        email[0] = employee.getEmail();
         response.setPayLoad(employeeService.registerEmployee(employee));
         String text = "Akun anda telah Berhasil di buat \n" +
                 "username : "+employee.getUsername() +"\n" +
                 "password : "+pass;
-        emailService.sendEmail(user.getEmail(), employee.getEmail(),"succes create email", text);
+        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
         response.setStatus(true);
         response.getMessages().add("employee saved!!");
         return ResponseEntity.ok(response);
