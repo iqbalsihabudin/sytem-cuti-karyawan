@@ -14,6 +14,8 @@ import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.service.EmailService;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseData<Employee>> register(@RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<ResponseData<Employee>> register(@RequestBody EmployeeDto employeeDto) throws MessagingException, UnsupportedEncodingException {
         String pass = "123";
         ResponseData<Employee> response = new ResponseData<>();
         Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

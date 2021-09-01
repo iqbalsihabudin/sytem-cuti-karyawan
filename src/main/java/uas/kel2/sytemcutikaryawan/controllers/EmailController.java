@@ -18,8 +18,9 @@ public class EmailController {
     @GetMapping("/send")
     public Object send(@RequestBody EmailPayLoad dto){
         try {
-
-            //emailService.sendEmail(dto.getTo(),dto.getSubject(), dto.getText());
+            String[] email = new String[1];
+            email[0] = dto.getTo();
+            emailService.sendEmail(dto.getFrom(), email,"acc", "test");
         }catch (Exception e){
 
         }

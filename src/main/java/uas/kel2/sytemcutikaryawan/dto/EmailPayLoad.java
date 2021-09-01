@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailPayLoad {
+    String from;
     String to;
     String subject;
     String text;

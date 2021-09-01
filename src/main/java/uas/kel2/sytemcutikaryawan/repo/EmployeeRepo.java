@@ -14,7 +14,9 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT COUNT(u)  FROM Employee u WHERE u.deleted = false AND u.role.roleId = 2")
     public Integer employeeCount();
-    
+
+    @Query("SELECT u.email FROM Employee u WHERE u.deleted = false AND u.role.roleId = 1")
+    public List<String> emailHRD();
 
     @Query(value = "select * from tbl_employee  LIMIT :limit OFFSET :start" , nativeQuery = true)
     public Iterable<Employee> findAllByLimit(@Param("start") int start,@Param("limit") int limit);

@@ -13,10 +13,15 @@ import uas.kel2.sytemcutikaryawan.models.HakCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.EmailService;
+import uas.kel2.sytemcutikaryawan.service.EmployeeService;
 import uas.kel2.sytemcutikaryawan.service.HakCutiService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -30,6 +35,9 @@ public class PengajuanCutiController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
@@ -86,15 +94,23 @@ public class PengajuanCutiController {
     }
 
     @PostMapping("/insertPengajuanCuti")
-    public ResponseEntity<ResponseData<PengajuanCuti>> create(@RequestBody PengajuanCutiDto pengajuanCutiDto){
+    public ResponseEntity<ResponseData<PengajuanCuti>> create(@RequestBody PengajuanCutiDto pengajuanCutiDto) throws MessagingException, UnsupportedEncodingException {
         ResponseData<PengajuanCuti> responseData = new ResponseData<>();
-
+        Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<String> emailList = employeeService.emailHRD();
+        String[] emailArr = emailList.toArray(new String[emailList.size()]);
+        String text = "ada pengajuan cuti dari " +user.getNamaLengkap() +" ";
+        emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
-
         responseData.setStatus(true);
         responseData.getMessages().add("insert sukses");
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         return ResponseEntity.ok(responseData);
+    }
+
+    @GetMapping("/email")
+    public List<String> email(){
+        return employeeService.emailHRD();
     }
 
     @PutMapping("/updatePengajuanCuti")

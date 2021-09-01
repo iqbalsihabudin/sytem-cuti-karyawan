@@ -16,6 +16,7 @@ import uas.kel2.sytemcutikaryawan.repo.EmployeeRepo;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.List;
 
 @Service
 @Transactional
@@ -91,4 +92,7 @@ public class EmployeeService implements UserDetailsService {
 
     public Iterable<Employee> findAllByLimit(int start, int limit){return employeeRepo.findAllByLimit(start,limit);}
 
+    public List<String> emailHRD(){
+        return employeeRepo.emailHRD();
+    }
 }
