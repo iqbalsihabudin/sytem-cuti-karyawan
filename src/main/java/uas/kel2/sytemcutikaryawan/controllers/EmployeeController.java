@@ -11,8 +11,12 @@ import uas.kel2.sytemcutikaryawan.dto.EmployeeDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.dto.SandiDto;
 import uas.kel2.sytemcutikaryawan.models.Employee;
+import uas.kel2.sytemcutikaryawan.models.HakCuti;
+import uas.kel2.sytemcutikaryawan.models.JenisCuti;
 import uas.kel2.sytemcutikaryawan.service.EmailService;
 import uas.kel2.sytemcutikaryawan.service.EmployeeService;
+import uas.kel2.sytemcutikaryawan.service.HakCutiService;
+import uas.kel2.sytemcutikaryawan.service.JenisCutiService;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -32,6 +36,12 @@ public class EmployeeController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    private HakCutiService hakCutiService;
+
+    @Autowired
+    private JenisCutiService jenisCutiService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -54,7 +64,22 @@ public class EmployeeController {
         String text = "Akun anda telah Berhasil di buat \n" +
                 "username : "+employee.getUsername() +"\n" +
                 "password : "+pass;
-        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
+//        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
+        for(int a = 1 ; a <= 2 ; a++){
+            HakCuti hakCuti = new HakCuti();
+            if(a == 1){
+                JenisCuti jenisCuti = jenisCutiService.findById(a);
+                hakCuti.setJenisCuti(jenisCuti);
+                hakCuti.setEmployee(employee);
+                hakCuti.setSisaCuti(12);
+            }else if(a == 2){
+                JenisCuti jenisCuti = jenisCutiService.findById(a);
+                hakCuti.setJenisCuti(jenisCuti);
+                hakCuti.setEmployee(employee);
+                hakCuti.setSisaCuti(0);
+            }
+            hakCutiService.save(hakCuti);
+        }
         response.setStatus(true);
         response.getMessages().add("employee saved!!");
         return ResponseEntity.ok(response);
