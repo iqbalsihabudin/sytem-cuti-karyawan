@@ -37,13 +37,11 @@ public class TemplateControllers {
 
     @GetMapping("/Profile")
     String user(Model model){
-
         return "user";
     }
 
     @GetMapping("/AboutUs")
     String AboutUs(Model model){
-
         return "AboutUs";
     }
 

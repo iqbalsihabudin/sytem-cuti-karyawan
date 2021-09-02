@@ -26,7 +26,7 @@ import java.util.Collections;
 @SQLDelete(sql = "UPDATE tbl_employee SET is_deleted = true, account_non_expired = false  WHERE employee_id = ?")
 @FilterDef(name = "deletedEmployeeFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 @Filter(name = "deletedEmployeeFilter", condition = "is_deleted = :isDeleted")
-public class Employee implements UserDetails {
+public class Employee extends BaseEntity<String> implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employee_id;

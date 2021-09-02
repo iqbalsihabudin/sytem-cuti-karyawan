@@ -23,9 +23,6 @@ public class PengajuanCuti extends BaseEntity<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pengajuanCutiId;
-    @Column(name = "pengganti_id",length = 18)
-    private Integer penggantiId;
-    @Column(name = "hrd_id",length = 18)
     private Integer hrdId;
     @Column(name = "alamat",length = 18)
     private String alamat;
@@ -47,4 +44,12 @@ public class PengajuanCuti extends BaseEntity<String>{
     @JoinColumn(name = "status_cuti_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private StatusCuti statusCuti;
+
+    @ManyToOne
+    @JoinColumn(name = "pengganti_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Employee pengganti;
+
+
+
 }
