@@ -8,14 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
-import uas.kel2.sytemcutikaryawan.models.Employee;
-import uas.kel2.sytemcutikaryawan.models.HakCuti;
-import uas.kel2.sytemcutikaryawan.models.Libur;
-import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
-import uas.kel2.sytemcutikaryawan.service.EmailService;
-import uas.kel2.sytemcutikaryawan.service.EmployeeService;
-import uas.kel2.sytemcutikaryawan.service.HakCutiService;
-import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
+import uas.kel2.sytemcutikaryawan.models.*;
+import uas.kel2.sytemcutikaryawan.service.*;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -38,6 +32,9 @@ public class PengajuanCutiController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private DetailPengajuanCutiService detailPengajuanCutiService;
 
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
@@ -100,11 +97,17 @@ public class PengajuanCutiController {
         List<String> emailList = employeeService.emailHRD();
         String[] emailArr = emailList.toArray(new String[emailList.size()]);
         String text = "ada pengajuan cuti dari " +user.getNamaLengkap() +" ";
-        emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
+//        emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
+        responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
+        //====insert detail pengajuan
+        DetailPengajuanCuti detailPengajuanCuti = new DetailPengajuanCuti();
+        detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
+        detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
+        detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
+        detailPengajuanCutiService.save(detailPengajuanCuti);
         responseData.setStatus(true);
         responseData.getMessages().add("insert sukses");
-        responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         return ResponseEntity.ok(responseData);
     }
 
