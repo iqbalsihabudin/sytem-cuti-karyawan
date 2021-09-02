@@ -10,7 +10,6 @@ import java.util.Date;
 @Data
 public class PengajuanCutiDto {
     private Integer pengajuanCutiId;
-    private Integer penggantiId;
     private Integer hrdId;
     private String alamat;
     private String noTelp;
@@ -19,5 +18,6 @@ public class PengajuanCutiDto {
     private Employee employee;
     private StatusCuti statusCuti;
     private Date date;
+    private Employee penggantiId;
     private JenisCuti jenisCuti;
 }
