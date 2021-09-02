@@ -13,8 +13,14 @@ import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.DetailPengajuanCutiService;
 import uas.kel2.sytemcutikaryawan.service.EmailService;
+import uas.kel2.sytemcutikaryawan.service.PDFGeneratorService;
 import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +40,25 @@ public class DetailPengajuanCutiController {
 
     @Autowired
     EmailService emailService;
+
+    private final PDFGeneratorService pdfGeneratorService;
+
+    public DetailPengajuanCutiController(PDFGeneratorService pdfGeneratorService){
+        this.pdfGeneratorService = pdfGeneratorService;
+    }
+
+    @GetMapping("/pdf/generate/{id}")
+    public void generatePDF(@PathVariable("id") Integer id,HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:hh:mm:ss");
+//        String currentDateTime = dateFormatter.format(new Date());
+        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(id);
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=data_detail_Pengajuan.pdf";
+        response.setHeader(headerKey, headerValue);
+
+        this.pdfGeneratorService.export(response,detailPengajuanCuti);
+    }
 
     @GetMapping("/findAll")
     public Iterable<DetailPengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
