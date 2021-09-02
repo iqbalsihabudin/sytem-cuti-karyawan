@@ -70,7 +70,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/findAllByLimit")
-    public  Iterable<Employee> findAllByLimit(@RequestParam(value = "start",defaultValue = "0") int start, @RequestParam(value = "limit",defaultValue = "5") int limit){
+    public  Iterable<Employee> findAllByLimit(@RequestParam(value = "start",defaultValue = "0") int start, @RequestParam(value = "limit",defaultValue = "10") int limit){
         return employeeService.findAllByLimit(start,limit);
     }
 

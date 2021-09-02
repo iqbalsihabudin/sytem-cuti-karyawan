@@ -13,7 +13,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-public class DashboardControllers {
+public class TemplateControllers {
 
     @Autowired
     private EmployeeService employeeService;
@@ -45,6 +45,12 @@ public class DashboardControllers {
     String AboutUs(Model model){
 
         return "AboutUs";
+    }
+
+    @GetMapping("/RequestLeave")
+    String RequestLeave(Model model){
+
+        return "RequestLeave";
     }
 
 }

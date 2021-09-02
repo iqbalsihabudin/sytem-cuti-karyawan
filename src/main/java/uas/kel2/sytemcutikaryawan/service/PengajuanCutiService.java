@@ -79,4 +79,10 @@ public class PengajuanCutiService {
     public PengajuanCuti findById(Integer id){
         return pengajuanCutiRepo.findByPengajuanCutiId(id);
     }
+
+    public PengajuanCuti pengajuanCutiById(int id){
+        return pengajuanCutiRepo.pengajuanCutiById(id);
+    }
+
+    public Iterable<PengajuanCuti> findAllByLimit(int start, int limit){return pengajuanCutiRepo.findAllByLimit(start,limit);}
 }

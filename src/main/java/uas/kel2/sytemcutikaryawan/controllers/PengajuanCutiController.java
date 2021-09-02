@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
+import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.models.HakCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
@@ -25,9 +26,19 @@ public class PengajuanCutiController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @GetMapping("/pengajuanCutiById")
+    public PengajuanCuti pengajuanCutiById(@RequestParam(value = "id",required = false,defaultValue = "false")int id){
+        return pengajuanCutiService.pengajuanCutiById(id);
+    }
+
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         return pengajuanCutiService.findALl(isDeleted);
+    }
+
+    @GetMapping("/findAllByLimit")
+    public  Iterable<PengajuanCuti> findAllByLimit(@RequestParam(value = "start",defaultValue = "0") int start, @RequestParam(value = "limit",defaultValue = "10") int limit){
+        return pengajuanCutiService.findAllByLimit(start,limit);
     }
 
     @DeleteMapping("/{id}")

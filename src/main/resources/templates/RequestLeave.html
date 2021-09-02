@@ -1,0 +1,537 @@
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/faces/office-building.png">
+  <link rel="icon" type="image/png" href="/assets/img/faces/office-building.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Request Leave
+  </title>
+  <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link href="/css/material-dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="webjars/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body class="">
+
+<div class="modal fade" id="modalLoad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <center>
+          <lord-icon
+                  src="https://cdn.lordicon.com/rhvddzym.json"
+                  trigger="loop"
+                  colors="primary:#121331,secondary:#08a88a"
+                  style="width:250px;height:250px">
+          </lord-icon>
+        </center>
+      </div>
+
+    </div>
+  </div>
+</div>
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+      <div class="logo"><a href="/Dashboard" class="simple-text logo-normal">
+        <lord-icon
+                src="https://cdn.lordicon.com/vlupvdhl.json"
+                trigger="hover"
+                colors="primary:#121331,secondary:#a866ee"
+                axis-x="50"
+                style="width:180px;height:180px">
+        </lord-icon>
+        <br>
+          Group 2
+        </a></div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item   ">
+            <a class="nav-link" href="/Dashboard">
+              <lord-icon
+                      src="https://cdn.lordicon.com/jvucoldz.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item  ">
+            <a class="nav-link" href="/Profile">
+              <lord-icon
+                      src="https://cdn.lordicon.com/dxjqoygy.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Profile
+            </a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="/RequestLeave">
+              <lord-icon
+                      src="https://cdn.lordicon.com/puvaffet.json"
+                      trigger="hover"
+                      colors="primary:#ffffff,secondary:#ffffff"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              Request Leave
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/AboutUs">
+              <lord-icon
+                      src="https://cdn.lordicon.com/nobciafz.json"
+                      trigger="hover"
+                      colors="primary:#121331,secondary:#a866ee"
+                      style="width:50px;height:50px">
+              </lord-icon>
+              About Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Request Leave</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                  <a class="dropdown-item" href="#">Another Notification</a>
+                  <a class="dropdown-item" href="#">Another One</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="/Profile">Profile</a>
+                  <a class="dropdown-item" href="#">Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/logout">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row" >
+            <div class="col-lg-3 col-md-6 col-sm-6" id="listOfLeave">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                  </div>
+                  <p class="card-category " >Leave Status Now : <span id="titleLeave"></span> </p>
+                  <h3 class="card-title " id="timeLeave"></h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons text-success">circle</i>Status : <span class="text-right text-success" id="status">&nbsp;  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" id="sisaCutiTahunan" >
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                  </div>
+                  <p class="card-category" >Remaining Annual leave</p>
+                  <h3 class="card-title">12</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">update</i> Just Updated
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" id="sisaLintasTahun" >
+              <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                  </div>
+                  <p class="card-category">The Rest Of This Year's Cross</p>
+                  <h3 class="card-title">0</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">update</i> Just Updated
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info " id="notif" role="alert" style="display: none">
+            Your leave application has been saved successfully. <a href="#" class="alert-link">
+            click here </a>for more information.
+          </div>
+          <div class="row">
+
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Request Leave</h4>
+                  <p class="card-category">Input yout form request leave</p>
+                </div>
+                <div class="card-body">
+                  <form action="javascript:save()" id="update">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Full Name </label>
+                          <input type="text" id="id" class="form-control" hidden required>
+                          <input type="text" id="namaLengkap" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Address</label>
+                          <input type="text" id="alamat" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">No Telp/Hp</label>
+                          <input id="noTelp" type="text" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Description</label>
+                          <input type="text" id="keterangan" class="form-control" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Time Periode</label>
+                          <input type="number" min="1"id="lamaCuti" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Substitute</label>
+                          <input type="text" id="penggantiId" class="form-control" required>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="text" id="pengajuanCutiId" hidden>
+                    <button type="button" id="btnSend" onclick="send()" class="btn btn-info pull-right" data-bs-toggle="modal" data-bs-target="#modalLoad">Send</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary pull-right">Save</button>
+
+
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Leave status</h4>
+
+                </div>
+                <div class="card-body">
+                  <div class="accordion accordion-flush" id="accordionFlushExample">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+
+                  Group 2
+
+              </li>
+              <li>
+                <a href="/AboutUs">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/iqbalsihabudin/sytem-cuti-karyawan" target="_blank">
+                  Github
+                </a>
+              </li>
+
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, UAS Java Lanjutan <i class="material-icons">favorite</i> by Group 2
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="webjars/jquery/3.2.0/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap-material-design.min.js"></script>>
+
+  <script>
+    var idEmployee=0;
+    tampilkanStatus();
+    tampilkanEmployee();
+    tampilkanRequestLeave();
+    function tampilkanEmployee() {
+      fetch('/api/employee/userLogin')
+              .then(response => response.json())
+              .then(data => {
+
+                console.log(data)
+                show(data);
+
+                function show(employee) {
+                  idEmployee = employee.employee_id;
+                  document.getElementById('id').value = employee.employee_id;
+                  document.getElementById('namaLengkap').value = employee.namaLengkap;
+
+
+
+                }
+              });
+    }
+
+    function tampilkanRequestLeave() {
+      showStatus("None","-","No Status");
+      fetch('/api/pengajuanCuti/findAll')
+              .then(response => response.json())
+              .then(data => {
+
+                const tbody = document.getElementById('update');
+                data.forEach(leave => showTable(leave));
+
+                function showTable(leave) {
+                  if (leave.employee.employee_id===idEmployee  ){
+                    showStatus(leave.keterangan,leave.lamaCuti,leave.statusCuti.statusCuti);
+                    if(leave.statusCuti.statusCutiId===1){
+
+                      document.getElementById("alamat").disabled = true;
+                      document.getElementById("namaLengkap").disabled = true;
+                      document.getElementById("noTelp").disabled = true;
+                      document.getElementById("keterangan").disabled = true;
+                      document.getElementById("lamaCuti").disabled = true;
+                      document.getElementById("penggantiId").disabled = true;
+                      document.getElementById("btnSave").disabled = true;
+                      document.getElementById("btnSend").disabled = false;
+
+
+                      document.getElementById('pengajuanCutiId').value=leave.pengajuanCutiId;
+                      document.getElementById('alamat').value=leave.alamat;
+                      document.getElementById('noTelp').value=leave.noTelp;
+                      document.getElementById('keterangan').value=leave.keterangan;
+                      document.getElementById('lamaCuti').value=leave.lamaCuti;
+                      document.getElementById('penggantiId').value=leave.penggantiId;
+
+                    }
+                  }else{
+                    document.getElementById("btnSend").disabled = true;
+
+                  }
+
+
+                }
+              });
+    }
+    function showStatus(title,lama,status) {
+
+      document.getElementById('titleLeave').innerText = title;
+      document.getElementById('timeLeave').innerText = lama;
+      document.getElementById('status').innerText = status;
+
+
+
+    }
+
+    function tampilkanStatus() {
+      fetch('http://localhost:8083/api/statuscuti/findAll')
+              .then(response => response.json())
+              .then(data => {
+
+                data.forEach(leaveStatus => showTable(leaveStatus));
+
+                function showTable(leaveStatus) {
+                  document.getElementById('accordionFlushExample').innerHTML +=
+                          `<div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading`+leaveStatus.statusCutiId+`">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+leaveStatus.statusCutiId+`" aria-expanded="false" aria-controls="flush-collapse`+leaveStatus.statusCutiId+`">`
+                            +leaveStatus.statusCuti+
+                            `</button>
+                      </h2>
+                      <div id="flush-collapse`+leaveStatus.statusCutiId+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+leaveStatus.statusCutiId+`" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">`+leaveStatus.deskripsi+`</div>
+                      </div>
+                    </div>`
+
+
+                }
+              });
+    }
+    const formUpdate = document.getElementById('update');
+    async function save() {
+
+
+      await fetch('api/pengajuanCuti/insertPengajuanCuti', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'alamat': formUpdate.alamat.value,
+          'noTelp': formUpdate.noTelp.value,
+          'keterangan': formUpdate.keterangan.value,
+          'lamaCuti': formUpdate.lamaCuti.value,
+          'penggantiId': formUpdate.penggantiId.value,
+          'hrdId': 1,
+          'statusCuti' : {
+            "statusCutiId": 1
+          },
+          'employee': {
+            "employee_id": formUpdate.id.value
+          }
+        })
+      })
+              .then(response => {
+
+                document.getElementById('notif').style.display = 'block'
+                setTimeout(function(){
+                  document.getElementById('notif').style.display = 'none' ;
+                }, 3000);
+              });
+
+      tampilkanRequestLeave();
+    }
+
+    async function send() {
+
+
+      await fetch('api/pengajuanCuti/insertPengajuanCuti', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'pengajuanCutiId':formUpdate.pengajuanCutiId.value,
+          'alamat': formUpdate.alamat.value,
+          'noTelp': formUpdate.noTelp.value,
+          'keterangan': formUpdate.keterangan.value,
+          'lamaCuti': formUpdate.lamaCuti.value,
+          'penggantiId': formUpdate.penggantiId.value,
+          'hrdId': 1,
+          'statusCuti' : {
+            "statusCutiId": 2
+          },
+          'employee': {
+            "employee_id": formUpdate.id.value
+          }
+        })
+      })
+              .then(response => {
+
+                setTimeout(function(){
+
+                  $('#modalLoad').modal('toggle');
+
+                }, 3000);
+              });
+      formUpdate.alamat.value="";
+      formUpdate.noTelp.value="";
+      formUpdate.keterangan.value="";
+      formUpdate.lamaCuti.value="";
+      formUpdate.penggantiId.value="";
+      tampilkanRequestLeave();
+
+
+
+
+    }
+
+  </script>
+</body>
+
+</html>

@@ -12,7 +12,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
     Optional<Employee> findByUsername(String username);
 
-    @Query("SELECT COUNT(u)  FROM Employee u WHERE u.deleted = false AND u.role.roleId = 2")
+    @Query("SELECT COUNT(u)  FROM Employee u WHERE u.deleted = false")
     public Integer employeeCount();
 
     @Query(value = "select * from tbl_employee  LIMIT :limit OFFSET :start" , nativeQuery = true)

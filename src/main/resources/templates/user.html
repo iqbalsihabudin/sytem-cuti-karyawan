@@ -74,7 +74,7 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
 
-          <li class="nav-item ">
+          <li class="nav-item " id="cuti">
             <a class="nav-link" href="/RequestLeave">
               <lord-icon
                       src="https://cdn.lordicon.com/puvaffet.json"
@@ -345,9 +345,12 @@ The above copyright notice and this permission notice shall be included in all c
                   nama[0].innerHTML = employee.namaLengkap;
                   const role =document.getElementsByClassName('Role');
                   role[0].innerHTML = employee.role.nameRole + '/' + employee.divisi ;
-
+                  if (employee.role.roleId=='1'){
+                    document.getElementById('cuti').style.display="none";
+                  }
 
                 }
+
               });
     }
 
