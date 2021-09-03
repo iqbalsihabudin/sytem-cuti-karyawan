@@ -64,7 +64,7 @@ public class EmployeeController {
         String text = "Akun anda telah Berhasil di buat \n" +
                 "username : "+employee.getUsername() +"\n" +
                 "password : "+pass;
-//        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
+       emailService.sendEmail(user.getEmail(), email,"succes create email", text);
         for(int a = 1 ; a <= 2 ; a++){
             HakCuti hakCuti = new HakCuti();
             if(a == 1){

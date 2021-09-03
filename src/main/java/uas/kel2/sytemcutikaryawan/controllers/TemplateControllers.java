@@ -51,4 +51,10 @@ public class TemplateControllers {
         return "RequestLeave";
     }
 
+    @GetMapping("/Setting")
+    String Setting(Model model){
+
+        return "ChangePassword";
+    }
+
 }

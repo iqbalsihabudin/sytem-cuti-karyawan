@@ -8,17 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
-<<<<<<< HEAD
-import uas.kel2.sytemcutikaryawan.models.Employee;
-import uas.kel2.sytemcutikaryawan.models.HakCuti;
-import uas.kel2.sytemcutikaryawan.models.Libur;
-import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
-import uas.kel2.sytemcutikaryawan.service.HakCutiService;
-import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
-=======
+
 import uas.kel2.sytemcutikaryawan.models.*;
 import uas.kel2.sytemcutikaryawan.service.*;
->>>>>>> 226cc7caa2c5ae2612b829ded46cf7f531788a2a
+
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -36,12 +29,7 @@ public class PengajuanCutiController {
     @Autowired
     private ModelMapper modelMapper;
 
-<<<<<<< HEAD
-    @GetMapping("/pengajuanCutiById")
-    public PengajuanCuti pengajuanCutiById(@RequestParam(value = "id",required = false,defaultValue = "false")int id){
-        return pengajuanCutiService.pengajuanCutiById(id);
-    }
-=======
+
     @Autowired
     EmailService emailService;
 
@@ -50,7 +38,7 @@ public class PengajuanCutiController {
 
     @Autowired
     private DetailPengajuanCutiService detailPengajuanCutiService;
->>>>>>> 226cc7caa2c5ae2612b829ded46cf7f531788a2a
+
 
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
