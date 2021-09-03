@@ -137,7 +137,7 @@ public class EmployeeController {
             Employee a = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (bCryptPasswordEncoder.matches(sandi.getOldSandi(), a.getPassword())){
                 a.setPassword(sandi.getNewSandi());
-                employeeService.registerEmployee(a);
+                employeeService.changePassword(a);
                 response.put("message","sukses mengganti password");
                 response.put("success",true);
                 return response;

@@ -11,10 +11,7 @@ import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.models.DetailPengajuanCuti;
 import uas.kel2.sytemcutikaryawan.models.Employee;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
-import uas.kel2.sytemcutikaryawan.service.DetailPengajuanCutiService;
-import uas.kel2.sytemcutikaryawan.service.EmailService;
-import uas.kel2.sytemcutikaryawan.service.PDFGeneratorService;
-import uas.kel2.sytemcutikaryawan.service.PengajuanCutiService;
+import uas.kel2.sytemcutikaryawan.service.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,14 +48,31 @@ public class DetailPengajuanCutiController {
     @GetMapping("/pdf/generate/{id}")
     public void generatePDF(@PathVariable("id") Integer id,HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:hh:mm:ss");
-//        String currentDateTime = dateFormatter.format(new Date());
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:hh:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
         DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(id);
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=data_detail_Pengajuan.pdf";
+        String headerValue = "attachment; filename=detail_Pengajuan_"+ currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
         this.pdfGeneratorService.export(response,detailPengajuanCuti);
+    }
+
+    @GetMapping("/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=PengajuanCuti_"+ currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        Iterable<DetailPengajuanCuti> listData = detailPengajuanCutiService.findALl(false);
+
+        ExcelExporterService excelExporter = new ExcelExporterService(listData);
+
+        excelExporter.export(response);
     }
 
     @GetMapping("/findAll")
