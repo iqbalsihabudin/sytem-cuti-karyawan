@@ -68,6 +68,14 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepo.save(user);
     }
 
+    public Employee changePassword(Employee user){
+
+            String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+            user.setPassword(encondedPassword);
+
+        return employeeRepo.save(user);
+    }
+
 
     public Iterable<Employee> findALl(boolean isDeleted){
         Session session = entityManager.unwrap(Session.class);

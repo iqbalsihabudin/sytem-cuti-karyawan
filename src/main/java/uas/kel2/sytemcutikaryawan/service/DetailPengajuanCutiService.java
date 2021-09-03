@@ -12,6 +12,7 @@ import uas.kel2.sytemcutikaryawan.repo.DetailPengajuanCutiRepo;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -30,7 +31,7 @@ public class DetailPengajuanCutiService {
         Session session = entityManager.unwrap(Session.class);
         Filter filter = session.enableFilter("deletedDetPengajuanFilter");
         filter.setParameter("isDeleted", isDeleted);
-        Iterable<DetailPengajuanCuti> detailPengajuanCutis = detailPengajuanCutiRepo.findAll();
+        List<DetailPengajuanCuti> detailPengajuanCutis = detailPengajuanCutiRepo.findAll();
         session.disableFilter("deletedLiburFilter");
         return detailPengajuanCutis;
     }
