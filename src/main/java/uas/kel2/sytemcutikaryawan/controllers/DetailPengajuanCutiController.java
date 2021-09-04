@@ -39,6 +39,9 @@ public class DetailPengajuanCutiController {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    private HakCutiService hakCutiService;
+
     private final PDFGeneratorService pdfGeneratorService;
 
     public DetailPengajuanCutiController(PDFGeneratorService pdfGeneratorService){
@@ -97,8 +100,11 @@ public class DetailPengajuanCutiController {
         HashMap<String, Object> response= new HashMap<>();
         try {
             Integer idPeng = detailPengajuanCutiService.findById(id).getPengajuanCuti().getPengajuanCutiId();
-            pengajuanCutiService.updateStatusAcc(idPeng);
+            Integer idJen = detailPengajuanCutiService.findById(id).getJenisCuti().getJenisCutiId();
+            Integer idEmp = detailPengajuanCutiService.findById(id).getPengajuanCuti().getEmployee().getEmployee_id();
             Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            pengajuanCutiService.updateStatusAcc(idPeng, user.getEmployee_id());
+            hakCutiService.hakCutiMinus(idJen, idEmp);
             PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
             String[] email = new String[1];
             email[0] = pengajuanCuti.getEmployee().getEmail();
@@ -119,8 +125,8 @@ public class DetailPengajuanCutiController {
         HashMap<String, Object> response= new HashMap<>();
         try {
             Integer idPeng = detailPengajuanCutiService.findById(id).getPengajuanCuti().getPengajuanCutiId();
-            pengajuanCutiService.updateStatusReject(idPeng);
             Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            pengajuanCutiService.updateStatusReject(idPeng, user.getEmployee_id());
             PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
             String[] email = new String[1];
             email[0] = pengajuanCuti.getEmployee().getEmail();
