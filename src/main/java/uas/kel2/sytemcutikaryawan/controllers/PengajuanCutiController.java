@@ -11,10 +11,7 @@ import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 
 import uas.kel2.sytemcutikaryawan.models.*;
 import uas.kel2.sytemcutikaryawan.service.*;
-<<<<<<< HEAD
 
-=======
->>>>>>> 0ecabfd904a34de7a5ad7e032592cfcb53a045e5
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -41,10 +38,7 @@ public class PengajuanCutiController {
 
     @Autowired
     private DetailPengajuanCutiService detailPengajuanCutiService;
-<<<<<<< HEAD
 
-=======
->>>>>>> 0ecabfd904a34de7a5ad7e032592cfcb53a045e5
 
     @GetMapping("/findAll")
     public Iterable<PengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){

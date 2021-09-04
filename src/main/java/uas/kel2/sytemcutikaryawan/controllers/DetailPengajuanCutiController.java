@@ -75,6 +75,11 @@ public class DetailPengajuanCutiController {
         excelExporter.export(response);
     }
 
+    @GetMapping("/findAllByLimit")
+    public  Iterable<DetailPengajuanCuti> findAllByLimit(@RequestParam(value = "start",defaultValue = "0") int start, @RequestParam(value = "limit",defaultValue = "10") int limit){
+        return detailPengajuanCutiService.findAllByLimit(start,limit);
+    }
+
     @GetMapping("/findAll")
     public Iterable<DetailPengajuanCuti> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         return detailPengajuanCutiService.findALl(isDeleted);
