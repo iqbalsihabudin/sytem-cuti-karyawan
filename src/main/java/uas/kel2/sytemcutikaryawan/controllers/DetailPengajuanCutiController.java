@@ -185,4 +185,11 @@ public class DetailPengajuanCutiController {
         detailPengajuanCutiService.remove(id);
     }
 
+    @PutMapping("/pengajuan/cancel/{id}")
+    public void pengajuanCancel(@PathVariable("id") Integer id){
+        DetailPengajuanCuti dp = detailPengajuanCutiService.findById(id);
+        detailPengajuanCutiService.pengajuanCancel(dp);
+
+    }
+
 }
