@@ -64,12 +64,12 @@ public class EmployeeController {
         String text = "Selamat bergabung di perusahaan kami. \n" +
                 "Akun anda telah Berhasil di buat \n" +
                 "Dengan rincian data sebagai berikut: \n" +
-                "Nama     : "+employee.getNamaLengkap() + "\n" +
-                "NIP      : "+employee.getNip() + "\n" +
-                "Jabatan  : "+employee.getRole().getNameRole() + "\n" +
-                "Divisi   : "+employee.getDivisi() + "\n" +
-                "username : "+employee.getUsername() +"\n" +
-                "password : "+pass + "\n" +
+                "Nama       : "+employee.getNamaLengkap() + "\n" +
+                "NIP        : "+employee.getNip() + "\n" +
+                "Jabatan    : Karyawan\n" +
+                "Divisi     : "+employee.getDivisi() + "\n" +
+                "username   : "+employee.getUsername() +"\n" +
+                "password   : "+pass + "\n" +
                 "Berikut link untuk login http://localhost:8083/login \n" +
                 "Semoga kita dapat bekerjasama dengan baik.\n" +
                 "Hormat saya, \n" +

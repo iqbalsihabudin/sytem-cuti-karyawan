@@ -92,4 +92,13 @@ public class PengajuanCutiService {
     }
 
     public Iterable<PengajuanCuti> findAllByLimit(int start, int limit){return pengajuanCutiRepo.findAllByLimit(start,limit);}
+
+    public PengajuanCuti update(PengajuanCuti pengajuanCuti){
+        PengajuanCuti currentPengajuanCuti = pengajuanCutiRepo.findById(pengajuanCuti.getPengajuanCutiId()).get();
+        modelMapper.map(pengajuanCuti, currentPengajuanCuti);
+        StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(1);
+        currentPengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCuti = currentPengajuanCuti;
+        return pengajuanCutiRepo.save(pengajuanCuti);
+    }
 }

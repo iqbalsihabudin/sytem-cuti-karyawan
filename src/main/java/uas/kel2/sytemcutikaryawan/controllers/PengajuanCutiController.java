@@ -129,4 +129,23 @@ public class PengajuanCutiController {
     public Integer countAllpc(){
         return pengajuanCutiService.PengajuanCutiCountAll();
     }
+
+    @PutMapping("/updatePeng")
+    public ResponseEntity<ResponseData<PengajuanCuti>> updatePeng(@RequestBody PengajuanCutiDto pengajuanCutiDto) throws MessagingException, UnsupportedEncodingException {
+        ResponseData<PengajuanCuti> responseData = new ResponseData<>();
+        System.out.println(pengajuanCutiDto.getPengajuanCutiId());
+        PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
+        PengajuanCuti tamp = pengajuanCutiService.findById(pengajuanCuti.getPengajuanCutiId());
+        pengajuanCuti.setCreatedBy(tamp.getCreatedBy());
+        pengajuanCuti.setCreatedDate(tamp.getCreatedDate());
+        responseData.setPayLoad(pengajuanCutiService.update(pengajuanCuti));
+        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(pengajuanCutiDto.getDetId());
+        detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
+        detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
+        detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
+        detailPengajuanCutiService.save(detailPengajuanCuti);
+        responseData.setStatus(true);
+        responseData.getMessages().add("insert sukses");
+        return ResponseEntity.ok(responseData);
+    }
 }

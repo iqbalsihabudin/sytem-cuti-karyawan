@@ -231,7 +231,7 @@ The above copyright notice and this permission notice shall be included in all c
                       </button>
                     </div>
                     <div class="col-3" id="btnCancel" style="display: none">
-                      <button title="Cancel Send" type="button" class="btn btn-outline-danger btn-link btn"  >
+                      <button title="Cancel Send" type="button" onclick="cancel(document.getElementById('detId'))" class="btn btn-outline-danger btn-link btn"  >
                         <i class="material-icons fa-4x text-danger">
                             cancel_schedule_send
                         </i>
@@ -303,7 +303,8 @@ The above copyright notice and this permission notice shall be included in all c
                     <input type="text" id="detId" hidden>
                     <input type="text" id="pengajuanCutiId" hidden >
                     <button type="button" id="btnEdit" onclick="editForm()" class="btn btn-info pull-right">Edit</button>
-                    <button type="submit" id="btnSave" class="btn btn-primary pull-right">Save</button>
+                    <button type="button" id="btnsaveEdit" onclick="edit()" class="btn btn-primary pull-right" style="display: none">Save</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary pull-right" style="display: block">Save</button>
 
 
                   </form>
@@ -370,6 +371,7 @@ The above copyright notice and this permission notice shall be included in all c
   <script>
     document.getElementById("btnEdit").disabled = true;
     var idEmployee=0;
+    var detId = 0;
     cutiTahunanDanLintasTahun();
     tampilkanStatus();
     tampilkanEmployee();
@@ -438,7 +440,7 @@ The above copyright notice and this permission notice shall be included in all c
 
                     showStatus(leave.pengajuanCuti.keterangan,leave.pengajuanCuti.lamaCuti,leave.pengajuanCuti.statusCuti.statusCuti);
                     if(leave.pengajuanCuti.statusCuti.statusCutiId===1 || leave.pengajuanCuti.statusCuti.statusCutiId===2 ){
-
+                      detId = leave.detailPengajuanCutiId;
                       document.getElementById("alamat").disabled = true;
                       document.getElementById("date").disabled = true;
                       document.getElementById("jenisCuti").disabled = true;
@@ -472,6 +474,7 @@ The above copyright notice and this permission notice shall be included in all c
                       document.getElementById('detId').value=leave.detailPengajuanCutiId;
 
 
+
                     }
                   }else{
 
@@ -485,8 +488,8 @@ The above copyright notice and this permission notice shall be included in all c
     }
 
     function editForm() {
-
-      document.getElementById("btnSave").disabled = false;
+      document.getElementById("btnSave").style.display = "none";
+      document.getElementById("btnsaveEdit").style.display = "block";
       document.getElementById("btnEdit").disabled = true;
       document.getElementById("alamat").disabled = false;
       document.getElementById("date").disabled = false;
@@ -496,6 +499,7 @@ The above copyright notice and this permission notice shall be included in all c
       document.getElementById("keterangan").disabled = false;
       document.getElementById("lamaCuti").disabled = false;
       document.getElementById("penggantiId").disabled = false;
+
     }
 
     function showStatus(title,lama,status) {
@@ -534,7 +538,6 @@ The above copyright notice and this permission notice shall be included in all c
     }
     const formUpdate = document.getElementById('update');
     async function save() {
-      alert(formUpdate.pengajuanCutiId.value)
       await fetch('api/pengajuanCuti/insertPengajuanCuti', {
         method: 'POST',
         headers: {
@@ -575,8 +578,20 @@ The above copyright notice and this permission notice shall be included in all c
 
     }
 
+    async function cancel(){
+
+
+      await fetch("api/detailPengajuanCuti/cancel/"+detId,{method : 'PUT'})
+        .then(response => {
+          document.location.href ="/RequestLeave"
+
+        })
+      tampilkanRequestLeave()
+      tampilkanStatus()
+    }
+
     async function send() {
-      $('#modalLoad').modal('toggle');
+
       await fetch('api/pengajuanCuti/updatePengajuanCuti', {
         method: 'POST',
         headers: {
@@ -602,8 +617,13 @@ The above copyright notice and this permission notice shall be included in all c
         })
       })
               .then(response => {
-                $('#modalLoad').modal('toggle');
+
               });
+      $('#modalLoad').modal('toggle');
+      setTimeout(function(){
+        $('#modalLoad').modal('toggle');
+      }, 3000);
+      tampilkanRequestLeave();
       document.getElementById('btnSave').disabled=true;
       document.getElementById('btnEdit').disabled=true;
       formUpdate.alamat.value="";
@@ -617,6 +637,56 @@ The above copyright notice and this permission notice shall be included in all c
 
 
     }
+
+    async function edit() {
+      await fetch('api/pengajuanCuti//updatePeng', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'pengajuanCutiId':formUpdate.pengajuanCutiId.value,
+          'alamat': "Kurang tau",
+          'noTelp': formUpdate.noTelp.value,
+          'keterangan': formUpdate.keterangan.value,
+          'lamaCuti': formUpdate.lamaCuti.value,
+          'penggantiId' : {
+            "employee_id": formUpdate.penggantiId.value
+          },
+          'jenisCuti':{
+            "jenisCutiId" : formUpdate.jenisCuti.value
+          },
+          'employee': {
+            "employee_id": formUpdate.id.value
+          },
+          "detId" : formUpdate.detId.value
+
+        })
+      })
+              .then(response => {
+
+              });
+      document.getElementById("btnSave").style.display = "block";
+      document.getElementById("btnsaveEdit").style.display = "none";
+      document.getElementById('notif').style.display = 'block'
+      setTimeout(function(){
+        document.getElementById('notif').style.display = 'none' ;
+      }, 3000);
+      document.getElementById('btnSave').disabled=true;
+      document.getElementById('btnEdit').disabled=true;
+      formUpdate.alamat.value="";
+      formUpdate.noTelp.value="";
+      formUpdate.keterangan.value="";
+      formUpdate.lamaCuti.value="";
+      formUpdate.penggantiId.value="";
+      tampilkanRequestLeave();
+
+
+
+
+    }
+
+
     function getFormattedDate(date) {
 
       var date = new Date(date);

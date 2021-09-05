@@ -899,10 +899,10 @@
                             <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>
                             <td class="td-actions text-right">
 
-                                <button  type="button" rel="tooltip" title="Approved"  onclick="modalController('Approved ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.pengajuanCuti.pengajuanCutiId +`\`)" class="btn btn-primary btn-link btn-sm">
+                                <button  type="button" rel="tooltip" title="Approved"  onclick="modalController('Approved ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.detailPengajuanCutiId +`\`)" class="btn btn-primary btn-link btn-sm">
                                     <i class="material-icons">check</i>
                                 </button> &nbsp;
-                                <button type="button" rel="tooltip" title="Rejected" onclick="modalController('Rejected ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.pengajuanCuti.pengajuanCutiId+`\`)" class="btn btn-danger btn-link btn-sm">
+                                <button type="button" rel="tooltip" title="Rejected" onclick="modalController('Rejected ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.detailPengajuanCutiId+`\`)" class="btn btn-danger btn-link btn-sm">
                                     <i class="material-icons">close</i>
                                 </button> &nbsp;
                                 <button type="button" rel="tooltip" title="Details" onclick="modalController('Detail',\`` + leave.pengajuanCuti.employee.namaLengkap  +`\`,\``+leave.detailPengajuanCutiId+`\`)"class="btn btn-info btn-link btn-sm" >
@@ -1004,7 +1004,9 @@
 
         const jenis = document.getElementById('jenis').value;
         const id = document.getElementById('Id').value;
+
         if (jenis === "Approved "){
+
             $('#modalLoad').modal('toggle');
             await fetch('api/detailPengajuanCuti/acc/'+id, {method:'PUT'})
 
