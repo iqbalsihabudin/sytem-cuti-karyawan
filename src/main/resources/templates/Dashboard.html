@@ -315,7 +315,7 @@
                                     <i class="fas fa-user-minus"></i>
                                 </div>
                                 <p class="card-category">Employees On Leave</p>
-                                <h3 class="card-title">75</h3>
+                                <h3 class="card-title" id="acc"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -349,7 +349,7 @@
                                     <i class="far fa-question-circle"></i>
                                 </div>
                                 <p class="card-category">Request For Leave</p>
-                                <h3 class="card-title RequestLeavein"></h3>
+                                <h3 class="card-title " id="RequestLeavein"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -365,11 +365,16 @@
                     <div class="col-lg-6 col-md-12" >
                         <div class="card">
                             <div class="card-header card-header-tabs card-header-primary">
-                                <div class="nav-tabs-navigation col-9">
-
-                                        <h4 class="card-title">Request For Leave</h4>
-                                        <p class="card-category">The entry submission has been updated</p>
-
+                                <div class="row justify-content-center">
+                                <div class="col-9">
+                                    <h4 class="card-title">Request For Leave</h4>
+                                    <p class="card-category">The entry submission has been updated</p>
+                                </div>
+                                <div class="col-3">
+                                    <a th:href="@{api/detailPengajuanCuti/export/excel}"><button title="Download Excel" type="button" class="btn btn-outline-primary btn-link btn"  >
+                                        <i class="fas fa-file-download fa-3x" style="color: whitesmoke;"></i>
+                                    </button></a>
+                                </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -502,6 +507,7 @@
                                             <th>Long Leave</th>
                                             <th>Substitute</th>
                                             <th>Status</th>
+                                            <th>Action</th>
 
                                             </thead>
                                             <tbody id="RequestLeaveKaryawan">
@@ -638,7 +644,7 @@
     var no = 0; var sum =0;
     var nomor = 0; var nomer=0;
     controller();
-
+    EmployeeOnLeave()
     EmployeeCount();
     RequestLeaveCount();
 
@@ -681,7 +687,19 @@
                 console.log(data)
                 const tbody = document.getElementById('countEmployee');
 
-                tbody.innerHTML += data
+                tbody.innerHTML = data
+
+
+            });
+    }
+    function EmployeeOnLeave() {
+        fetch('api/pengajuanCuti/countAllpc')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const tbody = document.getElementById('acc');
+
+                tbody.innerHTML = data
 
 
             });
@@ -690,14 +708,9 @@
         fetch('/api/pengajuanCuti/countOpenpc')
             .then(response => response.json())
             .then(data => {
+               
                 console.log(data);
-                const tbody = document.getElementsByClassName('RequestLeavein');
-                var i;
-                for (i = 0; i < tbody.length; i++) {
-                    tbody[i].innerHTML += data;
-                }
-
-
+                document.getElementById('RequestLeavein').innerHTML=data;
 
             });
     }
@@ -827,11 +840,27 @@
                             <td>` + leave.pengajuanCuti.keterangan +  `</td>
                             <td>` + leave.pengajuanCuti.lamaCuti +` days</td>
                             <td>` + leave.pengajuanCuti.pengganti.namaLengkap + `</td>
-                            <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>`
+                            <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>
+                            <td class="td-actions text-right">
+                                <button type="button"  rel="tooltip" onclick="pdf(`+leave.detailPengajuanCutiId+`)" title="Download As Pdf"  class="btn btn-danger btn-link btn-sm">
+                                    <i class="fas fa-file-pdf fa-2x"></i>
+                                </button> &nbsp;
+                                <button type="button" rel="tooltip" onclick="modalController('Detail',\``+leave.pengajuanCuti.employee.namaLengkap+`\`,\``+leave.detailPengajuanCutiId+`\`,)" title="Details" class="btn btn-info btn-link btn-sm" >
+                                     <i class="fas fa-info-circle fa-2x"></i>
+                                </button>
+
+                            </td>`
                     
                 }
             });
     }
+
+    function pdf(id) {
+
+        document.location.href="api/detailPengajuanCuti/pdf/generate/"+id;
+
+    }
+
     function tampilkanRequestLeave(url,page) {
         switch (page) {
             case 1 : nomer=0;break;
@@ -877,6 +906,32 @@
                 }
             });
     }
+
+    function detail(id) {
+
+        fetch("api/detailPengajuanCuti/findAll")
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(leave => showTable(leave));
+
+                function showTable(leave) {
+
+                    if (leave.detailPengajuanCutiId == id){
+                        document.getElementById('date').innerHTML=getFormattedDate(leave.tglCuti);
+                        document.getElementById('Nipp').innerHTML=leave.pengajuanCuti.employee.nip;
+                        document.getElementById('DIVISION').innerHTML=leave.pengajuanCuti.employee.divisi;
+                        document.getElementById('noTelp').innerHTML=leave.pengajuanCuti.noTelp;
+                        document.getElementById('EMAILl').innerHTML=leave.pengajuanCuti.employee.email;
+                        document.getElementById('description').innerHTML=leave.pengajuanCuti.keterangan;
+                        document.getElementById('lamaCuti').innerHTML=leave.pengajuanCuti.lamaCuti+" Days" ;
+
+                    }
+
+                }
+            });
+
+    }
+
     function getFormattedDate(date) {
 
         var date = new Date(date);
@@ -921,9 +976,9 @@
     }
     function modalController(jenis,nama,id) {
         if (jenis === "Detail"){
-            alert(id);
-            $('#modalDetail').modal('toggle');
 
+            $('#modalDetail').modal('toggle');
+            detail(id);
             document.getElementById('NAMA').innerText=nama;
 
         }else{
@@ -937,30 +992,38 @@
     }
 
     async function accRejected() {
+        $('#modalSure').modal('toggle');
+
         const jenis = document.getElementById('jenis').value;
         const id = document.getElementById('Id').value;
         if (jenis === "Approved "){
-
-            await fetch('http://localhost:8083/api/pengajuanCuti/acc/'+id, {method:'PUT'})
+            $('#modalLoad').modal('toggle');
+            await fetch('api/detailPengajuanCuti/acc/'+id, {method:'PUT'})
 
                 .then(response => {
-                    $('#modalSure').modal('toggle');
-                    console.log(response.json())
+                    setTimeout(function(){
+                        $('#modalLoad').modal('toggle');
+                    }, 3000);
+
                 });
-            document.getElementById('RequestLeave').innerHTML="";
-            tampilkanRequestLeave();
+
 
         }else if(jenis === "Rejected "){
-
-            await fetch('http://localhost:8083/api/pengajuanCuti/reject/'+id, {method:'PUT'})
+            $('#modalLoad').modal('toggle');
+            await fetch('api/detailPengajuanCuti/reject/'+id, {method:'PUT'})
 
                 .then(response => {
-                    $('#modalSure').modal('toggle');
-                    console.log(response.json())
+                    setTimeout(function(){
+                        $('#modalLoad').modal('toggle');
+                    }, 3000);
                 });
-            document.getElementById('RequestLeave').innerHTML="";
-            tampilkanRequestLeave();
+
+
         }
+        RequestLeaveCount();
+        EmployeeOnLeave();
+        document.getElementById('RequestLeave').innerHTML="";
+        initLeave(0,10,1);
     }
 
 

@@ -11,10 +11,7 @@ import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 
 import uas.kel2.sytemcutikaryawan.models.*;
 import uas.kel2.sytemcutikaryawan.service.*;
-<<<<<<< HEAD
 
-=======
->>>>>>> 5f9b6866f397be1955a90aa104225dd5600f939e
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
@@ -86,7 +83,7 @@ public class PengajuanCutiController {
         return employeeService.emailHRD();
     }
 
-    @PutMapping("/updatePengajuanCuti")
+    @PostMapping("/updatePengajuanCuti")
     public ResponseEntity<ResponseData<PengajuanCuti>> update(@RequestBody PengajuanCutiDto pengajuanCutiDto) throws MessagingException, UnsupportedEncodingException {
         ResponseData<PengajuanCuti> responseData = new ResponseData<>();
         Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
