@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Data
 public class PengajuanCutiDto {
+    private Integer detId;
     private Integer pengajuanCutiId;
     private Integer hrdId;
     private String alamat;

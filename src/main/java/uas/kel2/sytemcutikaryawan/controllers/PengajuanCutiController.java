@@ -9,6 +9,7 @@ import uas.kel2.sytemcutikaryawan.dto.HakCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.PengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 
+
 import uas.kel2.sytemcutikaryawan.models.*;
 import uas.kel2.sytemcutikaryawan.service.*;
 
@@ -28,7 +29,6 @@ public class PengajuanCutiController {
 
     @Autowired
     private ModelMapper modelMapper;
-
 
     @Autowired
     EmailService emailService;
@@ -54,8 +54,6 @@ public class PengajuanCutiController {
     public void removeOne(@PathVariable("id") Integer id){
         pengajuanCutiService.remove(id);
     }
-
-
 
     @PostMapping("/insertPengajuanCuti")
     public ResponseEntity<ResponseData<PengajuanCuti>> create(@RequestBody PengajuanCutiDto pengajuanCutiDto) throws MessagingException, UnsupportedEncodingException {
@@ -97,7 +95,7 @@ public class PengajuanCutiController {
         pengajuanCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         //====insert detail pengajuan
-        DetailPengajuanCuti detailPengajuanCuti = new DetailPengajuanCuti();
+        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(pengajuanCutiDto.getDetId());
         detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
         detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
         detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
