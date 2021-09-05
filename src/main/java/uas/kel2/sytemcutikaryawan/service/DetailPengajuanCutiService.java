@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.DetailPengajuanCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
+import uas.kel2.sytemcutikaryawan.models.StatusCuti;
 import uas.kel2.sytemcutikaryawan.repo.DetailPengajuanCutiRepo;
+import uas.kel2.sytemcutikaryawan.repo.PengajuanCutiRepo;
+import uas.kel2.sytemcutikaryawan.repo.StatusCutiRepo;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -23,10 +26,16 @@ public class DetailPengajuanCutiService {
     ModelMapper modelMapper;
 
     @Autowired
+    private PengajuanCutiRepo pengajuanCutiRepo;
+
+    @Autowired
     private DetailPengajuanCutiRepo detailPengajuanCutiRepo;
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private StatusCutiRepo statusCutiRepo;
 
     public Iterable<DetailPengajuanCuti> findALl(boolean isDeleted){
         Session session = entityManager.unwrap(Session.class);
@@ -53,4 +62,11 @@ public class DetailPengajuanCutiService {
     }
 
     public Iterable<DetailPengajuanCuti> findAllByLimit(int start, int limit){return detailPengajuanCutiRepo.findAllByLimit(start,limit);}
+
+    public void pengajuanCancel(DetailPengajuanCuti dp){
+        PengajuanCuti pengajuanCuti = pengajuanCutiRepo.getById(dp.getPengajuanCuti().getPengajuanCutiId());
+        StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(5);
+        pengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCutiRepo.save(pengajuanCuti);
+    }
 }
