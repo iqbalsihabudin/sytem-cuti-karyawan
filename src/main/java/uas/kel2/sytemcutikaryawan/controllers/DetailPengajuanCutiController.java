@@ -10,6 +10,7 @@ import uas.kel2.sytemcutikaryawan.dto.DetailPengajuanCutiDto;
 import uas.kel2.sytemcutikaryawan.dto.ResponseData;
 import uas.kel2.sytemcutikaryawan.models.DetailPengajuanCuti;
 import uas.kel2.sytemcutikaryawan.models.Employee;
+import uas.kel2.sytemcutikaryawan.models.JenisCuti;
 import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.service.*;
 
@@ -113,7 +114,16 @@ public class DetailPengajuanCutiController {
             PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
             String[] email = new String[1];
             email[0] = pengajuanCuti.getEmployee().getEmail();
-            String text = "pengajuanmu telah di acc oleh hrd " +user.getNamaLengkap() +" ";
+            String text = user.getNamaLengkap() +" - Pengajuan Cuti Disetujui\n" +
+                    "Pengajuan cuti dengan rincian sebagai berikut: \n"+
+                    "Nama karyawan : "+user.getNamaLengkap() + "\n" +
+                    "Lama cuti     : "+pengajuanCuti.getLamaCuti() + "\n" +
+                    "Setelah dipertimbangkan dengan melihat situasi dan kondisi, \n"+
+                    "maka kami menyetujui permohonan pengajuan cuti anda.\n"+
+                    " \n" +
+                    "Salam, \n" +
+                    " \n" +
+                    "HRD UAS Java \n" ;
             emailService.sendEmail(user.getEmail(), email,"acc", text);
             response.put("message","Approved pengajuan berhasil");
             response.put("success",true);
@@ -135,7 +145,18 @@ public class DetailPengajuanCutiController {
             PengajuanCuti pengajuanCuti = pengajuanCutiService.findById(id);
             String[] email = new String[1];
             email[0] = pengajuanCuti.getEmployee().getEmail();
-            String text = "pengajuanmu di tolak oleh hrd " +user.getNamaLengkap() +" ";
+            String text = user.getNamaLengkap() +" - Pengajuan Cuti Ditolak\n" +
+                    "Pengajuan cuti dengan rincian sebagai berikut: \n"+
+                    "Nama karyawan : "+user.getNamaLengkap() + "\n" +
+                    "Lama cuti     : "+pengajuanCuti.getLamaCuti() + "\n" +
+                    "Setelah dipertimbangkan dengan melihat situasi dan kondisi, \n"+
+                    "maka dengan berat hati kami menolak permohonan pengajuan cuti anda.\n"+
+                    " \n" +
+                    "Mohon maaf atas ketidaknyamanan ini. \n"+
+                    " \n" +
+                    "Salam, \n" +
+                    " \n" +
+                    "HRD UAS Java \n" ;
             emailService.sendEmail(user.getEmail(), email,"tolak", text);
             response.put("message","Pengajuan reject");
             response.put("success",true);
@@ -162,6 +183,13 @@ public class DetailPengajuanCutiController {
     @DeleteMapping("/{id}")
     public void removeOne(@PathVariable("id") Integer id){
         detailPengajuanCutiService.remove(id);
+    }
+
+    @PutMapping("/pengajuan/cancel/{id}")
+    public void pengajuanCancel(@PathVariable("id") Integer id){
+        DetailPengajuanCuti dp = detailPengajuanCutiService.findById(id);
+        detailPengajuanCutiService.pengajuanCancel(dp);
+
     }
 
 }
