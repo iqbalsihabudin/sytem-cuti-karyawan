@@ -2,6 +2,7 @@ package uas.kel2.sytemcutikaryawan.service;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -75,12 +76,16 @@ public class ExcelExporterService {
         font.setFontHeight(14);
         style.setFont(font);
 
+        CreationHelper createHelper = workbook.getCreationHelper();
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/mm/yyyy"));
+
         for (DetailPengajuanCuti data : listData) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
 
             createCell(row, columnCount++, data.getDetailPengajuanCutiId(), style);
-            createCell(row, columnCount++, data.getTglCuti(), style);
+            createCell(row, columnCount++, data.getTglCuti(), cellStyle);
             createCell(row, columnCount++, data.getPengajuanCuti().getEmployee().getNip(), style);
             createCell(row, columnCount++, data.getPengajuanCuti().getEmployee().getNamaLengkap(), style);
             createCell(row, columnCount++, data.getPengajuanCuti().getNoTelp(), style);
