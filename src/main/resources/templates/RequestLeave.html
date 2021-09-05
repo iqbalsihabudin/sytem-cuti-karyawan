@@ -41,7 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="modal-body">
         <center>
           <lord-icon
-                  src="https://cdn.lordicon.com/rhvddzym.json"
+                  src="https://cdn.lordicon.com/xjovhxra.json"
                   trigger="loop"
                   colors="primary:#121331,secondary:#08a88a"
                   style="width:250px;height:250px">
@@ -136,30 +136,7 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="collapse navbar-collapse justify-content-end">
 
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:;">
-                  <i class="material-icons">dashboard</i>
-                  <p class="d-lg-none d-md-block">
-                    Stats
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">notifications</i>
-                  <span class="notification">5</span>
-                  <p class="d-lg-none d-md-block">
-                    Some Actions
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                  <a class="dropdown-item" href="#">Another Notification</a>
-                  <a class="dropdown-item" href="#">Another One</a>
-                </div>
-              </li>
+              <li>Hi, <span id="user"></span></li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">person</i>
@@ -198,14 +175,14 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" id="sisaCutiTahunan" >
+            <div class="col-lg-3 col-md-6 col-sm-6"  >
               <div class="card card-stats">
                 <div class="card-header card-header-danger card-header-icon">
                   <div class="card-icon">
                     <i class="fas fa-calendar-alt"></i>
                   </div>
                   <p class="card-category" >Remaining Annual leave</p>
-                  <h3 class="card-title">12</h3>
+                  <h3 class="card-title" id="cutiTahunan"></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -214,14 +191,14 @@ The above copyright notice and this permission notice shall be included in all c
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" id="sisaLintasTahun" >
+            <div class="col-lg-3 col-md-6 col-sm-6"  >
               <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
                   <div class="card-icon">
                     <i class="fas fa-calendar-alt"></i>
                   </div>
                   <p class="card-category">The Rest Of This Year's Cross</p>
-                  <h3 class="card-title">0</h3>
+                  <h3 class="card-title" id="lintasTahun"></h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -240,14 +217,49 @@ The above copyright notice and this permission notice shall be included in all c
 
             <div class="col-md-8">
               <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Request Leave</h4>
-                  <p class="card-category">Input yout form request leave</p>
+                <div class="card-header card-header-primary ">
+                  <div class="row justify-content-center">
+                    <div class="col-9">
+                      <h4 class="card-title">Request Leave</h4>
+                      <p class="card-category">Input yout form request leave</p>
+                    </div>
+                    <div class="col-3" id="btnSend" style="display: none">
+                      <button title="Send" type="button" onclick="send()" class="btn btn-outline-info btn-link btn"  >
+                        <i class="material-icons fa-3x text-info">
+                          send
+                          </i>
+                      </button>
+                    </div>
+                    <div class="col-3" id="btnCancel" style="display: none">
+                      <button title="Cancel Send" type="button" class="btn btn-outline-danger btn-link btn"  >
+                        <i class="material-icons fa-4x text-danger">
+                            cancel_schedule_send
+                        </i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
+
+
                 <div class="card-body">
                   <form action="javascript:save()" id="update">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-6">
+                        <div class="form-group bootstrap-datetimepicker-widget  ">
+                          <label class="bmd-label-floating">Date </label>
+                          <input type="date" id="date" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Type of Leave</label>
+                          <select class="form-select" id="jenisCuti" aria-label="Default select example">
+                            <option value="1">Annual leave</option>
+                            <option value="2">Cross year leave leave</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Full Name </label>
                           <input type="text" id="id" class="form-control" hidden required>
@@ -260,7 +272,7 @@ The above copyright notice and this permission notice shall be included in all c
                           <input type="text" id="alamat" class="form-control" required>
                         </div>
                       </div>
-                      <div class="col-md-5">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">No Telp/Hp</label>
                           <input id="noTelp" type="text" class="form-control" required>
@@ -274,7 +286,7 @@ The above copyright notice and this permission notice shall be included in all c
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Time Periode</label>
                           <input type="number" min="1"id="lamaCuti" class="form-control" required>
@@ -283,12 +295,13 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Substitute</label>
-                          <input type="text" id="penggantiId" class="form-control" required>
+
+                          <select class="form-select" id="penggantiId" aria-label="Default select example"></select>
                         </div>
                       </div>
                     </div>
                     <input type="text" id="pengajuanCutiId" hidden>
-                    <button type="button" id="btnSend" onclick="send()" class="btn btn-info pull-right" data-bs-toggle="modal" data-bs-target="#modalLoad">Send</button>
+                    <button type="button" id="btnEdit"  class="btn btn-info pull-right" data-bs-toggle="modal" data-bs-target="#modalLoad">Edit</button>
                     <button type="submit" id="btnSave" class="btn btn-primary pull-right">Save</button>
 
 
@@ -354,10 +367,13 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="/js/bootstrap-material-design.min.js"></script>>
 
   <script>
+
     var idEmployee=0;
+    cutiTahunanDanLintasTahun();
     tampilkanStatus();
     tampilkanEmployee();
     tampilkanRequestLeave();
+    tampilkanNamaEmployee();
     function tampilkanEmployee() {
       fetch('/api/employee/userLogin')
               .then(response => response.json())
@@ -370,6 +386,8 @@ The above copyright notice and this permission notice shall be included in all c
                   idEmployee = employee.employee_id;
                   document.getElementById('id').value = employee.employee_id;
                   document.getElementById('namaLengkap').value = employee.namaLengkap;
+                  document.getElementById('user').innerHTML = employee.namaLengkap;
+
 
 
 
@@ -377,9 +395,34 @@ The above copyright notice and this permission notice shall be included in all c
               });
     }
 
+    function cutiTahunanDanLintasTahun() {
+      fetch('/api/hakCuti/findAll')
+              .then(response =>response.json())
+              .then(data => {
+                console.log(data);
+                data.forEach(hakCuti => showTable(hakCuti));
+
+                function showTable(hakCuti) {
+
+                  if (hakCuti.employee.employee_id == idEmployee){
+
+                    if (hakCuti.jenisCuti.jenisCutiId == '1'){
+
+                      document.getElementById('cutiTahunan').innerHTML=hakCuti.sisaCuti;
+                    }else{
+                      document.getElementById('lintasTahun').innerHTML=hakCuti.sisaCuti;
+                    }
+                  }
+                }
+              });
+    }
+
+
+
     function tampilkanRequestLeave() {
-      showStatus("None","-","No Status");
-      fetch('/api/pengajuanCuti/findAll')
+      showStatus("None","-","No Status")
+
+      fetch('/api/detailPengajuanCuti/findAll')
               .then(response => response.json())
               .then(data => {
 
@@ -387,26 +430,40 @@ The above copyright notice and this permission notice shall be included in all c
                 data.forEach(leave => showTable(leave));
 
                 function showTable(leave) {
-                  if (leave.employee.employee_id===idEmployee  ){
-                    showStatus(leave.keterangan,leave.lamaCuti,leave.statusCuti.statusCuti);
-                    if(leave.statusCuti.statusCutiId===1){
+
+                  if (leave.pengajuanCuti.employee.employee_id===idEmployee  ){
+
+                    showStatus(leave.pengajuanCuti.keterangan,leave.pengajuanCuti.lamaCuti,leave.pengajuanCuti.statusCuti.statusCuti);
+                    if(leave.pengajuanCuti.statusCuti.statusCutiId===1 || leave.pengajuanCuti.statusCuti.statusCutiId===2 ){
 
                       document.getElementById("alamat").disabled = true;
+                      document.getElementById("date").disabled = true;
+                      document.getElementById("jenisCuti").disabled = true;
                       document.getElementById("namaLengkap").disabled = true;
                       document.getElementById("noTelp").disabled = true;
                       document.getElementById("keterangan").disabled = true;
                       document.getElementById("lamaCuti").disabled = true;
                       document.getElementById("penggantiId").disabled = true;
                       document.getElementById("btnSave").disabled = true;
-                      document.getElementById("btnSend").disabled = false;
+                      if (leave.pengajuanCuti.statusCuti.statusCutiId===1){
+                        document.getElementById("btnSend").style.display = "block";
+                        document.getElementById("btnCancel").style.display = "none";
+                      }else{
+                        document.getElementById("btnSend").style.display = "none";
+                        document.getElementById("btnCancel").style.display = "block";
+                      }
 
 
-                      document.getElementById('pengajuanCutiId').value=leave.pengajuanCutiId;
-                      document.getElementById('alamat').value=leave.alamat;
-                      document.getElementById('noTelp').value=leave.noTelp;
-                      document.getElementById('keterangan').value=leave.keterangan;
-                      document.getElementById('lamaCuti').value=leave.lamaCuti;
-                      document.getElementById('penggantiId').value=leave.penggantiId;
+                      document.getElementById('date').value=getFormattedDate(leave.tglCuti);
+                      document.getElementById('pengajuanCutiId').value=leave.pengajuanCuti.pengajuanCutiId;
+                      document.getElementById('alamat').value=leave.pengajuanCuti.alamat;
+                      document.getElementById('noTelp').value=leave.pengajuanCuti.noTelp;
+                      document.getElementById('keterangan').value=leave.pengajuanCuti.keterangan;
+                      document.getElementById('lamaCuti').value=leave.pengajuanCuti.lamaCuti;
+                      document.getElementById('penggantiId').value=leave.pengajuanCuti.pengganti.employee_id;
+                      document.getElementById('namePengganti').value=leave.pengajuanCuti.pengganti.namaLengkap;
+                      document.getElementById('jenisCuti').value=leave.jenisCuti.jenisCutiId;
+
 
                     }
                   }else{
@@ -454,71 +511,73 @@ The above copyright notice and this permission notice shall be included in all c
     }
     const formUpdate = document.getElementById('update');
     async function save() {
-
-
+      $('#modalLoad').modal('toggle');
       await fetch('api/pengajuanCuti/insertPengajuanCuti', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          'hrdId': null,
           'alamat': formUpdate.alamat.value,
           'noTelp': formUpdate.noTelp.value,
           'keterangan': formUpdate.keterangan.value,
           'lamaCuti': formUpdate.lamaCuti.value,
-          'penggantiId': formUpdate.penggantiId.value,
-          'hrdId': 1,
+          'penggantiId' : {
+                  "employee_id": formUpdate.penggantiId.value
+          },
+          'jenisCuti':{
+            "jenisCutiId" : formUpdate.jenisCuti.value
+          },
           'statusCuti' : {
             "statusCutiId": 1
           },
           'employee': {
             "employee_id": formUpdate.id.value
-          }
+          },
+          'date' : formUpdate.date.value
         })
       })
               .then(response => {
+                $('#modalLoad').modal('toggle');
 
-                document.getElementById('notif').style.display = 'block'
-                setTimeout(function(){
-                  document.getElementById('notif').style.display = 'none' ;
-                }, 3000);
               });
-
+      document.getElementById('notif').style.display = 'block'
+      setTimeout(function(){
+        document.getElementById('notif').style.display = 'none' ;
+      }, 3000);
       tampilkanRequestLeave();
     }
 
     async function send() {
-
-
-      await fetch('api/pengajuanCuti/insertPengajuanCuti', {
+      $('#modalLoad').modal('toggle');
+      await fetch('api/pengajuanCuti/updatePengajuanCuti', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           'pengajuanCutiId':formUpdate.pengajuanCutiId.value,
-          'alamat': formUpdate.alamat.value,
+          'alamat': "Kurang tau",
           'noTelp': formUpdate.noTelp.value,
           'keterangan': formUpdate.keterangan.value,
           'lamaCuti': formUpdate.lamaCuti.value,
-          'penggantiId': formUpdate.penggantiId.value,
-          'hrdId': 1,
-          'statusCuti' : {
-            "statusCutiId": 2
+          'penggantiId' : {
+            "employee_id": formUpdate.penggantiId.value
+          },
+          'jenisCuti':{
+            "jenisCutiId" : formUpdate.jenisCuti.value
           },
           'employee': {
             "employee_id": formUpdate.id.value
           }
+
         })
       })
               .then(response => {
-
-                setTimeout(function(){
-
-                  $('#modalLoad').modal('toggle');
-
-                }, 3000);
+                $('#modalLoad').modal('toggle');
               });
+
       formUpdate.alamat.value="";
       formUpdate.noTelp.value="";
       formUpdate.keterangan.value="";
@@ -529,6 +588,31 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
+    }
+    function getFormattedDate(date) {
+
+      var date = new Date(date);
+      return ( date.getFullYear()+ '-' +((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())));
+    }
+
+    function tampilkanNamaEmployee() {
+      fetch('api/employee/findAll')
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+                data.forEach(employee => show(employee));
+
+                function show(employee){
+
+                  if (employee.role.roleId=='1'){
+
+                  }else{
+                    document.getElementById('penggantiId').innerHTML +=`<option value="`+ employee.employee_id+`">`+employee.namaLengkap +`</option>`
+                  }
+
+                }
+
+              });
     }
 
   </script>

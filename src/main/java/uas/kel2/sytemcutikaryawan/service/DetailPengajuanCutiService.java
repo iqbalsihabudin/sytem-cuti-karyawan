@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uas.kel2.sytemcutikaryawan.models.DetailPengajuanCuti;
 import uas.kel2.sytemcutikaryawan.models.Libur;
+import uas.kel2.sytemcutikaryawan.models.PengajuanCuti;
 import uas.kel2.sytemcutikaryawan.repo.DetailPengajuanCutiRepo;
 
 import javax.persistence.EntityManager;
@@ -50,4 +51,6 @@ public class DetailPengajuanCutiService {
     public DetailPengajuanCuti findById(Integer id){
         return detailPengajuanCutiRepo.findByDetailPengajuanCutiId(id);
     }
+
+    public Iterable<DetailPengajuanCuti> findAllByLimit(int start, int limit){return detailPengajuanCutiRepo.findAllByLimit(start,limit);}
 }

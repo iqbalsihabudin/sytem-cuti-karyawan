@@ -17,12 +17,74 @@
     <link rel="stylesheet" href="webjars/font-awesome/5.15.3/css/all.min.css">
     <script src="/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
     <link rel="stylesheet" href="/css/dashboard.min.css?v=2.1.2"/>
-    <link href="/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <link href="/css/material-dashboard.css" rel="stylesheet" />
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">-->
 
     <title>Dashboard</title>
 </head>
 <body >
+
+
+<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Details</h5>
+                <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <table class="table ">
+                    <tr>
+                        <th colspan="3" class="text-center">Leave Application Information</th>
+                    </tr>
+                    <tr>
+                        <th>Date Of Leave </th>
+                        <td>:</td>
+                        <td id="date"></td>
+                    </tr>
+                    <tr>
+                        <th>NIP </th>
+                        <td>:</td>
+                        <td id="Nipp"></td>
+                    </tr>
+                    <tr>
+                        <th>Ful Name </th>
+                        <td>:</td>
+                        <td id="NAMA"></td>
+                    </tr>
+                    <tr>
+                        <th>Division </th>
+                        <td>:</td>
+                        <td id="DIVISION"></td>
+                    </tr>
+                    <tr>
+                        <th>Telp/Hp </th>
+                        <td>:</td>
+                        <td id="noTelp"></td>
+                    </tr>
+                    <tr>
+                        <th>Email </th>
+                        <td>:</td>
+                        <td id="EMAILl"></td>
+                    </tr>
+                    <tr>
+                        <th>Description </th>
+                        <td>:</td>
+                        <td id="description"></td>
+                    </tr>
+                    <tr>
+                        <th>Long Leave </th>
+                        <td>:</td>
+                        <td id="lamaCuti"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="modalLoad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -198,38 +260,10 @@
                     <span class="navbar-toggler-icon icon-bar"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end">
-                    <form class="navbar-form">
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                <lord-icon
-                                        src="https://cdn.lordicon.com/msoeawqm.json"
-                                        trigger="hover"
-                                        colors="primary:#121331,secondary:#a866ee"
-                                        style="width:35px;height:35px">
-                                </lord-icon>
-                                <div class="ripple-container"></div>
-                            </button>
-                        </div>
-                    </form>
+
                     <ul class="navbar-nav">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">notifications</i>
-                                <span class="notification RequestLeavein" ></span>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                                <a class="dropdown-item" href="#">Another Notification</a>
-                                <a class="dropdown-item" href="#">Another One</a>
-                            </div>
-                        </li>
+                        <li>Hi, <span id="user"></span></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">person</i>
@@ -281,7 +315,7 @@
                                     <i class="fas fa-user-minus"></i>
                                 </div>
                                 <p class="card-category">Employees On Leave</p>
-                                <h3 class="card-title">75</h3>
+                                <h3 class="card-title" id="acc"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -315,7 +349,7 @@
                                     <i class="far fa-question-circle"></i>
                                 </div>
                                 <p class="card-category">Request For Leave</p>
-                                <h3 class="card-title RequestLeavein"></h3>
+                                <h3 class="card-title " id="RequestLeavein"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -331,11 +365,16 @@
                     <div class="col-lg-6 col-md-12" >
                         <div class="card">
                             <div class="card-header card-header-tabs card-header-primary">
-                                <div class="nav-tabs-navigation">
-
-                                        <h4 class="card-title">Request For Leave</h4>
-                                        <p class="card-category">The entry submission has been updated</p>
-
+                                <div class="row justify-content-center">
+                                <div class="col-9">
+                                    <h4 class="card-title">Request For Leave</h4>
+                                    <p class="card-category">The entry submission has been updated</p>
+                                </div>
+                                <div class="col-3">
+                                    <a th:href="@{api/detailPengajuanCuti/export/excel}"><button title="Download Excel" type="button" class="btn btn-outline-primary btn-link btn"  >
+                                        <i class="fas fa-file-download fa-3x" style="color: whitesmoke;"></i>
+                                    </button></a>
+                                </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -344,9 +383,9 @@
                                         <table class="table">
                                             <thead class="text-warning">
                                             <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Time Period</th>
-                                            <th>Substitute</th>
+                                            <th>Date Of Leave</th>
+                                            <th>Long Leave</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                             </thead>
                                             <tbody id="RequestLeave">
@@ -360,9 +399,16 @@
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(0,10,1)">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(10,10,2)">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(20,10,3)">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(30,10,4)">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(40,10,5)">5</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(50,10,6)">6</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(60,10,7)">7</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(70,10,8)">8</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(80,10,9)">9</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:initLeave(90,10,10)">10</a></li>
                                                 <li class="page-item">
                                                     <a class="page-link" href="#" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
@@ -396,7 +442,7 @@
                             <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead class="text-warning">
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Name</th>
                                     <th>Role</th>
                                     <th>Division</th>
@@ -456,11 +502,12 @@
                                             <thead class="text-warning">
                                             <th>No</th>
                                             <th>Name</th>
-                                            <th>Address</th>
+                                            <th>Date Of Leave</th>
                                             <th>Description</th>
-                                            <th>Time Period</th>
+                                            <th>Long Leave</th>
                                             <th>Substitute</th>
                                             <th>Status</th>
+                                            <th>Action</th>
 
                                             </thead>
                                             <tbody id="RequestLeaveKaryawan">
@@ -597,11 +644,12 @@
     var no = 0; var sum =0;
     var nomor = 0; var nomer=0;
     controller();
-
+    EmployeeOnLeave()
     EmployeeCount();
     RequestLeaveCount();
 
     function controller() {
+
         fetch('/api/employee/userLogin')
             .then(response => response.json())
             .then(data => {
@@ -610,6 +658,7 @@
                 show(data);
 
                 function show(employee) {
+                    document.getElementById('user').innerHTML = employee.namaLengkap;
                     if(employee.role.roleId == '1'){
                         document.getElementById('Hrd').style.display = 'block';
                         document.getElementById('cuti').style.display= 'none';
@@ -638,7 +687,19 @@
                 console.log(data)
                 const tbody = document.getElementById('countEmployee');
 
-                tbody.innerHTML += data
+                tbody.innerHTML = data
+
+
+            });
+    }
+    function EmployeeOnLeave() {
+        fetch('api/pengajuanCuti/countAllpc')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const tbody = document.getElementById('acc');
+
+                tbody.innerHTML = data
 
 
             });
@@ -647,14 +708,9 @@
         fetch('/api/pengajuanCuti/countOpenpc')
             .then(response => response.json())
             .then(data => {
+               
                 console.log(data);
-                const tbody = document.getElementsByClassName('RequestLeavein');
-                var i;
-                for (i = 0; i < tbody.length; i++) {
-                    tbody[i].innerHTML += data;
-                }
-
-
+                document.getElementById('RequestLeavein').innerHTML=data;
 
             });
     }
@@ -686,7 +742,7 @@
 
     function getUrlLeave(start, limit) {
         console.log(start+limit)
-        return 'http://localhost:8083/api/pengajuanCuti/findAllByLimit/?start='+start+'&limit='+limit+'';
+        return 'http://localhost:8083/api/detailPengajuanCuti/findAllByLimit/?start='+start+'&limit='+limit+'';
     }
 
     function tampilkanEmployeeKaryawan(url,page) {
@@ -779,42 +835,110 @@
                 function showTable(leave) {
                         nomer+=1;
                         tbody.innerHTML += `<td>` + nomer + `</td>
-                            <td>` + leave.employee.namaLengkap + `</td>
-                            <td>` + leave.alamat +  `</td>
-                            <td>` + leave.keterangan +  `</td>
-                            <td>` + leave.lamaCuti +` days</td>
-                            <td>` + leave.penggantiId + `</td>
-                            <td>` + leave.statusCuti.statusCuti + `</td>`
+                            <td>` + leave.pengajuanCuti.employee.namaLengkap + `</td>
+                            <td>` + getFormattedDate(leave.tglCuti) +  `</td>
+                            <td>` + leave.pengajuanCuti.keterangan +  `</td>
+                            <td>` + leave.pengajuanCuti.lamaCuti +` days</td>
+                            <td>` + leave.pengajuanCuti.pengganti.namaLengkap + `</td>
+                            <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>
+                            <td class="td-actions text-right">
+                                <button type="button"  rel="tooltip" onclick="pdf(`+leave.detailPengajuanCutiId+`)" title="Download As Pdf"  class="btn btn-danger btn-link btn-sm">
+                                    <i class="fas fa-file-pdf fa-2x"></i>
+                                </button> &nbsp;
+                                <button type="button" rel="tooltip" onclick="modalController('Detail',\``+leave.pengajuanCuti.employee.namaLengkap+`\`,\``+leave.detailPengajuanCutiId+`\`,)" title="Details" class="btn btn-info btn-link btn-sm" >
+                                     <i class="fas fa-info-circle fa-2x"></i>
+                                </button>
+
+                            </td>`
                     
                 }
             });
     }
-    function tampilkanRequestLeave() {
-        fetch('/api/pengajuanCuti/findAll')
+
+    function pdf(id) {
+
+        document.location.href="api/detailPengajuanCuti/pdf/generate/"+id;
+
+    }
+
+    function tampilkanRequestLeave(url,page) {
+        switch (page) {
+            case 1 : nomer=0;break;
+            case 2 : nomer=10;break;
+            case 3 : nomer=20;break;
+            case 4 : nomer=30;break;
+            case 5 : nomer=40;break;
+            case 6 : nomer=50;break;
+            case 7 : nomer=60;break;
+            case 8 : nomer=70;break;
+            case 9 : nomer=80;break;
+            case 10 : nomer=90;break;
+
+        }
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 const tbody = document.getElementById('RequestLeave');
                 data.forEach(leave => showTable(leave));
 
                 function showTable(leave) {
-                    if (leave.statusCuti.statusCutiId == '2'){
-                        tbody.innerHTML += `<td xmlns:th="http://www.w3.org/1999/html">` + leave.employee.namaLengkap + `</td>
-                            <td>` + leave.keterangan +  `</td>
-                            <td>` + leave.lamaCuti +` days</td>
-                            <td>` + leave.penggantiId + `</td>
+                        var data = leave;
+                        console.log(data);
+                    if (leave.pengajuanCuti.statusCuti.statusCutiId == '2'){
+                        tbody.innerHTML += `<td>` + leave.pengajuanCuti.employee.namaLengkap + `</td>
+                            <td>` + getFormattedDate(leave.tglCuti) +  `</td>
+                            <td>` + leave.pengajuanCuti.lamaCuti +` days</td>
+                            <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>
                             <td class="td-actions text-right">
 
-                                <button  type="button" rel="tooltip" title="Approved"  onclick="modalController('Approved ',\`` + leave.employee.namaLengkap + `\`,\`` +leave.pengajuanCutiId +`\`)" class="btn btn-primary btn-link btn-sm">
+                                <button  type="button" rel="tooltip" title="Approved"  onclick="modalController('Approved ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.pengajuanCuti.pengajuanCutiId +`\`)" class="btn btn-primary btn-link btn-sm">
                                     <i class="material-icons">check</i>
-                                </button>
-                                <button type="button" rel="tooltip" title="Rejected" onclick="modalController('Rejected ',\`` + leave.employee.namaLengkap + `\`,\`` +leave.pengajuanCutiId+`\`)" class="btn btn-danger btn-link btn-sm">
+                                </button> &nbsp;
+                                <button type="button" rel="tooltip" title="Rejected" onclick="modalController('Rejected ',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` +leave.pengajuanCuti.pengajuanCutiId+`\`)" class="btn btn-danger btn-link btn-sm">
                                     <i class="material-icons">close</i>
+                                </button> &nbsp;
+                                <button type="button" rel="tooltip" title="Details" onclick="modalController('Detail',\`` + leave.pengajuanCuti.employee.namaLengkap  +`\`,\``+leave.detailPengajuanCutiId+`\`)"class="btn btn-info btn-link btn-sm" >
+                                     <span class="material-icons">info</span>
                                 </button>
+
                             </td>`
                     }
                 }
             });
     }
+
+    function detail(id) {
+
+        fetch("api/detailPengajuanCuti/findAll")
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(leave => showTable(leave));
+
+                function showTable(leave) {
+
+                    if (leave.detailPengajuanCutiId == id){
+                        document.getElementById('date').innerHTML=getFormattedDate(leave.tglCuti);
+                        document.getElementById('Nipp').innerHTML=leave.pengajuanCuti.employee.nip;
+                        document.getElementById('DIVISION').innerHTML=leave.pengajuanCuti.employee.divisi;
+                        document.getElementById('noTelp').innerHTML=leave.pengajuanCuti.noTelp;
+                        document.getElementById('EMAILl').innerHTML=leave.pengajuanCuti.employee.email;
+                        document.getElementById('description').innerHTML=leave.pengajuanCuti.keterangan;
+                        document.getElementById('lamaCuti').innerHTML=leave.pengajuanCuti.lamaCuti+" Days" ;
+
+                    }
+
+                }
+            });
+
+    }
+
+    function getFormattedDate(date) {
+
+        var date = new Date(date);
+        return (((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' +((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + date.getFullYear());
+    }
+
+
     const formSave = document.getElementById('save');
     const tbody = document.getElementById('tbody');
     const myModal = document.getElementById('exampleModal')
@@ -848,42 +972,61 @@
             });
         tbody.innerHTML = '';
         init(0,10,1);
+        EmployeeCount();
     }
     function modalController(jenis,nama,id) {
+        if (jenis === "Detail"){
+
+            $('#modalDetail').modal('toggle');
+            detail(id);
+            document.getElementById('NAMA').innerText=nama;
+
+        }else{
         document.getElementById('Id').value=id;
         document.getElementById('jenis').value=jenis;
         document.getElementById('modalSureLabel').innerHTML=jenis;
         document.getElementById('modalSureLabel1').innerHTML=jenis+"Request Leave From "+nama  +" ?";
 
         $('#modalSure').modal('toggle');
+        }
     }
 
     async function accRejected() {
+        $('#modalSure').modal('toggle');
+
         const jenis = document.getElementById('jenis').value;
         const id = document.getElementById('Id').value;
         if (jenis === "Approved "){
-
-            await fetch('http://localhost:8083/api/pengajuanCuti/acc/'+id, {method:'PUT'})
+            $('#modalLoad').modal('toggle');
+            await fetch('api/detailPengajuanCuti/acc/'+id, {method:'PUT'})
 
                 .then(response => {
-                    $('#modalSure').modal('toggle');
-                    console.log(response.json())
+                    setTimeout(function(){
+                        $('#modalLoad').modal('toggle');
+                    }, 3000);
+
                 });
-            document.getElementById('RequestLeave').innerHTML="";
-            tampilkanRequestLeave();
+
 
         }else if(jenis === "Rejected "){
-
-            await fetch('http://localhost:8083/api/pengajuanCuti/reject/'+id, {method:'PUT'})
+            $('#modalLoad').modal('toggle');
+            await fetch('api/detailPengajuanCuti/reject/'+id, {method:'PUT'})
 
                 .then(response => {
-                    $('#modalSure').modal('toggle');
-                    console.log(response.json())
+                    setTimeout(function(){
+                        $('#modalLoad').modal('toggle');
+                    }, 3000);
                 });
-            document.getElementById('RequestLeave').innerHTML="";
-            tampilkanRequestLeave();
+
+
         }
+        RequestLeaveCount();
+        EmployeeOnLeave();
+        document.getElementById('RequestLeave').innerHTML="";
+        initLeave(0,10,1);
     }
+
+
 
 </script>
 
