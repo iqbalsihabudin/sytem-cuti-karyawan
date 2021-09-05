@@ -92,19 +92,12 @@ public class PengajuanCutiController {
         pengajuanCuti.setCreatedBy(tamp.getCreatedBy());
         pengajuanCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
-        //====insert detail pengajuan
-        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(pengajuanCutiDto.getDetId());
-        detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
-        detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
-        detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
-        detailPengajuanCutiService.save(detailPengajuanCuti);
         String text = user.getNamaLengkap() +" - Pengajuan Cuti\n" +
                 " \n" +
                 "Kepada HRD UAS JAVA yang terhormat \n"+
                 "Dikarenakan ada urusan lain yang harus saya selesaikan, \n" +
                 "maka dari itu saya mengajukan cuti dengan rincian sebagai berikut: \n"+
                 "Lama cuti : "+pengajuanCuti.getLamaCuti() + "\n" +
-                "Jenis cuti : "+detailPengajuanCuti.getJenisCuti().getJenisCuti() + "\n" +
                 " \n" +
                 "Namun apabila saya harus tetap masuk kerja pada hari-hari itu, \n" +
                 "dan anda mengusulkan cuti pada hari lain, saya tidak masalah. \n" +
@@ -115,6 +108,13 @@ public class PengajuanCutiController {
                 " \n" +
                 user.getNamaLengkap();
         emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
+        //====insert detail pengajuan
+        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(pengajuanCutiDto.getDetId());
+        detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
+        detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
+        detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
+        detailPengajuanCutiService.save(detailPengajuanCuti);
+
         responseData.setStatus(true);
         responseData.getMessages().add("insert sukses");
         return ResponseEntity.ok(responseData);
