@@ -87,8 +87,6 @@ public class PengajuanCutiController {
         Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<String> emailList = employeeService.emailHRD();
         String[] emailArr = emailList.toArray(new String[emailList.size()]);
-        String text = "ada pengajuan cuti dari " +user.getNamaLengkap() +" ";
-        emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
         PengajuanCuti pengajuanCuti = modelMapper.map(pengajuanCutiDto, PengajuanCuti.class);
         PengajuanCuti tamp = pengajuanCutiService.findById(pengajuanCuti.getPengajuanCutiId());
         pengajuanCuti.setCreatedBy(tamp.getCreatedBy());
@@ -100,6 +98,23 @@ public class PengajuanCutiController {
         detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
         detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
         detailPengajuanCutiService.save(detailPengajuanCuti);
+        String text = user.getNamaLengkap() +" - Pengajuan Cuti\n" +
+                " \n" +
+                "Kepada HRD UAS JAVA yang terhormat \n"+
+                "Dikarenakan ada urusan lain yang harus saya selesaikan, \n" +
+                "maka dari itu saya mengajukan cuti dengan rincian sebagai berikut: \n"+
+                "Lama cuti : "+pengajuanCuti.getLamaCuti() + "\n" +
+                "Jenis cuti : "+detailPengajuanCuti.getJenisCuti().getJenisCuti() + "\n" +
+                " \n" +
+                "Namun apabila saya harus tetap masuk kerja pada hari-hari itu, \n" +
+                "dan anda mengusulkan cuti pada hari lain, saya tidak masalah. \n" +
+                " \n" +
+                "Terimakasih atas pertimbangan dan pengertian anda. \n"+
+                " \n" +
+                "Hormat saya, \n" +
+                " \n" +
+                user.getNamaLengkap();
+        emailService.sendEmail(user.getEmail(), emailArr,"pengajuan", text);
         responseData.setStatus(true);
         responseData.getMessages().add("insert sukses");
         return ResponseEntity.ok(responseData);

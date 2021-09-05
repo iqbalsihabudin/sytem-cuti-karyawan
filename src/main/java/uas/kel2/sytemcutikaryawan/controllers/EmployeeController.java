@@ -61,9 +61,21 @@ public class EmployeeController {
         String[] email = new String[1];
         email[0] = employee.getEmail();
         response.setPayLoad(employeeService.registerEmployee(employee));
-        String text = "Akun anda telah Berhasil di buat \n" +
+        String text = "Selamat bergabung di perusahaan kami. \n" +
+                "Akun anda telah Berhasil di buat \n" +
+                "Dengan rincian data sebagai berikut: \n" +
+                "Nama     : "+employee.getNamaLengkap() + "\n" +
+                "NIP      : "+employee.getNip() + "\n" +
+                "Jabatan  : "+employee.getRole().getNameRole() + "\n" +
+                "Divisi   : "+employee.getDivisi() + "\n" +
                 "username : "+employee.getUsername() +"\n" +
-                "password : "+pass;
+                "password : "+pass + "\n" +
+                "Berikut link untuk login http://localhost:8083/login \n" +
+                "Semoga kita dapat bekerjasama dengan baik.\n" +
+                "Hormat saya, \n" +
+                " \n" +
+                "HRD UAS JAVA \n" ;
+
        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
         for(int a = 1 ; a <= 2 ; a++){
             HakCuti hakCuti = new HakCuti();
