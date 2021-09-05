@@ -23,12 +23,17 @@ public class PDFGeneratorService {
 
         Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
         fontParagraph.setSize(12);
-        String text = "tanggal pengajuan \n" +
+        String text = "Tanggal pengajuan \n" +
                 "Perihal : " +detail.getPengajuanCuti().getKeterangan()+"\n\n"+
                 "Kepada \nHRD Perusahaan \nDitempat \nDengan Hormat \nYang Bertanda Tangan Di Bawah ini \n\n"+
                 "Nama : "+detail.getPengajuanCuti().getEmployee().getNamaLengkap() +"\n"+
                 "NIP  : "+detail.getPengajuanCuti().getEmployee().getNip() +"\n"+
-                "Divisi : "+detail.getPengajuanCuti().getEmployee().getDivisi() +"";
+                "Divisi : "+detail.getPengajuanCuti().getEmployee().getDivisi() +"\n\n"+
+                "Bermaksud mengajukan cuti dengan alasan terlampir selama beberapa hari.\n"+
+                "Demikian surat pengajuan cuti ini saya buat dan ajukan untuk bisa mendapatkan persetujuan dari Bapak.\n"+
+                "Atas perhatian dan waktu yang diberikan saya ucapkan terima kasih.\n\n"+
+                "Hormat saya,\n\n\n"+detail.getPengajuanCuti().getEmployee().getNamaLengkap();
+
         Paragraph paragraph2 = new Paragraph(""+text+"", fontParagraph);
         paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
 
