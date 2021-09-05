@@ -54,8 +54,6 @@ public class PengajuanCutiController {
         pengajuanCutiService.remove(id);
     }
 
-
-
     @PostMapping("/insertPengajuanCuti")
     public ResponseEntity<ResponseData<PengajuanCuti>> create(@RequestBody PengajuanCutiDto pengajuanCutiDto) throws MessagingException, UnsupportedEncodingException {
         ResponseData<PengajuanCuti> responseData = new ResponseData<>();
@@ -96,7 +94,7 @@ public class PengajuanCutiController {
         pengajuanCuti.setCreatedDate(tamp.getCreatedDate());
         responseData.setPayLoad(pengajuanCutiService.save(pengajuanCuti));
         //====insert detail pengajuan
-        DetailPengajuanCuti detailPengajuanCuti = new DetailPengajuanCuti();
+        DetailPengajuanCuti detailPengajuanCuti = detailPengajuanCutiService.findById(pengajuanCutiDto.getDetId());
         detailPengajuanCuti.setPengajuanCuti(pengajuanCuti);
         detailPengajuanCuti.setJenisCuti(pengajuanCutiDto.getJenisCuti());
         detailPengajuanCuti.setTglCuti(pengajuanCutiDto.getDate());
