@@ -64,7 +64,7 @@ public class EmployeeController {
         String text = "Akun anda telah Berhasil di buat \n" +
                 "username : "+employee.getUsername() +"\n" +
                 "password : "+pass;
-//        emailService.sendEmail(user.getEmail(), email,"succes create email", text);
+       emailService.sendEmail(user.getEmail(), email,"succes create email", text);
         for(int a = 1 ; a <= 2 ; a++){
             HakCuti hakCuti = new HakCuti();
             if(a == 1){
@@ -137,7 +137,7 @@ public class EmployeeController {
             Employee a = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (bCryptPasswordEncoder.matches(sandi.getOldSandi(), a.getPassword())){
                 a.setPassword(sandi.getNewSandi());
-                employeeService.registerEmployee(a);
+                employeeService.changePassword(a);
                 response.put("message","sukses mengganti password");
                 response.put("success",true);
                 return response;

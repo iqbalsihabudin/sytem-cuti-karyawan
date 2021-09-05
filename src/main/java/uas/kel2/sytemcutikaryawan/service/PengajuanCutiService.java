@@ -41,17 +41,19 @@ public class PengajuanCutiService {
         pengajuanCutiRepo.deleteById(id);
     }
 
-    public void updateStatusAcc(Integer id){
+    public void updateStatusAcc(Integer id, Integer hrd){
         PengajuanCuti pengajuanCuti = pengajuanCutiRepo.getById(id);
         StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(3);
         pengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCuti.setHrdId(hrd);
         pengajuanCutiRepo.save(pengajuanCuti);
     }
 
-    public void updateStatusReject(Integer id){
+    public void updateStatusReject(Integer id, Integer hrd){
         PengajuanCuti pengajuanCuti = pengajuanCutiRepo.getById(id);
         StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(4);
         pengajuanCuti.setStatusCuti(statusCuti);
+        pengajuanCuti.setHrdId(hrd);
         pengajuanCutiRepo.save(pengajuanCuti);
     }
 
@@ -63,7 +65,12 @@ public class PengajuanCutiService {
         if (pengajuanCuti.getPengajuanCutiId() != null){
             PengajuanCuti currentPengajuanCuti = pengajuanCutiRepo.findById(pengajuanCuti.getPengajuanCutiId()).get();
             modelMapper.map(pengajuanCuti, currentPengajuanCuti);
+            StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(2);
+            currentPengajuanCuti.setStatusCuti(statusCuti);
             pengajuanCuti = currentPengajuanCuti;
+        }else{
+            StatusCuti statusCuti = statusCutiRepo.findStatusCutiByStatusCutiId(1);
+            pengajuanCuti.setStatusCuti(statusCuti);
         }
         return pengajuanCutiRepo.save(pengajuanCuti);
     }

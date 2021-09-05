@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -68,6 +69,14 @@ public class EmployeeService implements UserDetailsService {
         return employeeRepo.save(user);
     }
 
+    public Employee changePassword(Employee user){
+
+            String encondedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+            user.setPassword(encondedPassword);
+
+        return employeeRepo.save(user);
+    }
+
 
     public Iterable<Employee> findALl(boolean isDeleted){
         Session session = entityManager.unwrap(Session.class);
@@ -94,5 +103,9 @@ public class EmployeeService implements UserDetailsService {
 
     public List<String> emailHRD(){
         return employeeRepo.emailHRD();
+    }
+
+    public Optional<Employee> findById(Integer id){
+        return employeeRepo.findById(id);
     }
 }
