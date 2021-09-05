@@ -41,7 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="modal-body">
         <center>
           <lord-icon
-                  src="https://cdn.lordicon.com/xjovhxra.json"
+                  src="https://cdn.lordicon.com/rhvddzym.json"
                   trigger="loop"
                   colors="primary:#121331,secondary:#08a88a"
                   style="width:250px;height:250px">
@@ -255,7 +255,7 @@ The above copyright notice and this permission notice shall be included in all c
                           <label class="bmd-label-floating">Type of Leave</label>
                           <select class="form-select" id="jenisCuti" aria-label="Default select example">
                             <option value="1">Annual leave</option>
-                            <option value="2">Cross year leave leave</option>
+                            <option value="2" id="inputLintastahun">Cross year leave leave</option>
                           </select>
                         </div>
                       </div>
@@ -300,8 +300,9 @@ The above copyright notice and this permission notice shall be included in all c
                         </div>
                       </div>
                     </div>
-                    <input type="text" id="pengajuanCutiId" hidden>
-                    <button type="button" id="btnEdit"  class="btn btn-info pull-right" data-bs-toggle="modal" data-bs-target="#modalLoad">Edit</button>
+                    <input type="text" id="detId" hidden>
+                    <input type="text" id="pengajuanCutiId" hidden >
+                    <button type="button" id="btnEdit" onclick="editForm()" class="btn btn-info pull-right">Edit</button>
                     <button type="submit" id="btnSave" class="btn btn-primary pull-right">Save</button>
 
 
@@ -367,7 +368,7 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="/js/bootstrap-material-design.min.js"></script>>
 
   <script>
-
+    document.getElementById("btnEdit").disabled = true;
     var idEmployee=0;
     cutiTahunanDanLintasTahun();
     tampilkanStatus();
@@ -407,9 +408,11 @@ The above copyright notice and this permission notice shall be included in all c
                   if (hakCuti.employee.employee_id == idEmployee){
 
                     if (hakCuti.jenisCuti.jenisCutiId == '1'){
-
                       document.getElementById('cutiTahunan').innerHTML=hakCuti.sisaCuti;
                     }else{
+                      if (hakCuti.sisaCuti === 0){
+                        document.getElementById('inputLintastahun').disabled=true;
+                      }
                       document.getElementById('lintasTahun').innerHTML=hakCuti.sisaCuti;
                     }
                   }
@@ -444,13 +447,16 @@ The above copyright notice and this permission notice shall be included in all c
                       document.getElementById("keterangan").disabled = true;
                       document.getElementById("lamaCuti").disabled = true;
                       document.getElementById("penggantiId").disabled = true;
+
                       document.getElementById("btnSave").disabled = true;
                       if (leave.pengajuanCuti.statusCuti.statusCutiId===1){
                         document.getElementById("btnSend").style.display = "block";
                         document.getElementById("btnCancel").style.display = "none";
+                        document.getElementById("btnEdit").disabled = false;
                       }else{
                         document.getElementById("btnSend").style.display = "none";
                         document.getElementById("btnCancel").style.display = "block";
+                        document.getElementById("btnEdit").disabled = true;
                       }
 
 
@@ -463,11 +469,13 @@ The above copyright notice and this permission notice shall be included in all c
                       document.getElementById('penggantiId').value=leave.pengajuanCuti.pengganti.employee_id;
                       document.getElementById('namePengganti').value=leave.pengajuanCuti.pengganti.namaLengkap;
                       document.getElementById('jenisCuti').value=leave.jenisCuti.jenisCutiId;
+                      document.getElementById('detId').value=leave.detailPengajuanCutiId;
 
 
                     }
                   }else{
-                    document.getElementById("btnSend").disabled = true;
+
+
 
                   }
 
@@ -475,6 +483,21 @@ The above copyright notice and this permission notice shall be included in all c
                 }
               });
     }
+
+    function editForm() {
+
+      document.getElementById("btnSave").disabled = false;
+      document.getElementById("btnEdit").disabled = true;
+      document.getElementById("alamat").disabled = false;
+      document.getElementById("date").disabled = false;
+      document.getElementById("jenisCuti").disabled = false;
+      document.getElementById("namaLengkap").disabled = false;
+      document.getElementById("noTelp").disabled = false;
+      document.getElementById("keterangan").disabled = false;
+      document.getElementById("lamaCuti").disabled = false;
+      document.getElementById("penggantiId").disabled = false;
+    }
+
     function showStatus(title,lama,status) {
 
       document.getElementById('titleLeave').innerText = title;
@@ -511,13 +534,14 @@ The above copyright notice and this permission notice shall be included in all c
     }
     const formUpdate = document.getElementById('update');
     async function save() {
-      $('#modalLoad').modal('toggle');
+      alert(formUpdate.pengajuanCutiId.value)
       await fetch('api/pengajuanCuti/insertPengajuanCuti', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          'pengajuanCutiId ' : formUpdate.pengajuanCutiId.value,
           'hrdId': null,
           'alamat': formUpdate.alamat.value,
           'noTelp': formUpdate.noTelp.value,
@@ -539,14 +563,16 @@ The above copyright notice and this permission notice shall be included in all c
         })
       })
               .then(response => {
-                $('#modalLoad').modal('toggle');
+
 
               });
+      document.getElementById('btnSave').disabled=true;
       document.getElementById('notif').style.display = 'block'
       setTimeout(function(){
         document.getElementById('notif').style.display = 'none' ;
       }, 3000);
       tampilkanRequestLeave();
+
     }
 
     async function send() {
@@ -570,14 +596,16 @@ The above copyright notice and this permission notice shall be included in all c
           },
           'employee': {
             "employee_id": formUpdate.id.value
-          }
+          },
+          "detId" : formUpdate.detId.value
 
         })
       })
               .then(response => {
                 $('#modalLoad').modal('toggle');
               });
-
+      document.getElementById('btnSave').disabled=true;
+      document.getElementById('btnEdit').disabled=true;
       formUpdate.alamat.value="";
       formUpdate.noTelp.value="";
       formUpdate.keterangan.value="";
@@ -614,6 +642,8 @@ The above copyright notice and this permission notice shall be included in all c
 
               });
     }
+
+
 
   </script>
 </body>

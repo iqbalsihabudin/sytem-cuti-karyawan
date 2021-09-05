@@ -325,14 +325,14 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-6" id="activeEmployee" >
+                    <div class="col-lg-3 col-md-6 col-sm-6" >
                         <div class="card card-stats">
                             <div class="card-header card-header-info card-header-icon">
                                 <div class="card-icon">
                                     <i class="fas fa-user-check"></i>
                                 </div>
                                 <p class="card-category">Active Employees</p>
-                                <h3 class="card-title">+245</h3>
+                                <h3 class="card-title" id="activeEmployeeCount"></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -643,9 +643,11 @@
 <script>
     var no = 0; var sum =0;
     var nomor = 0; var nomer=0;
+    var activeEmployee = 0;
+    var idEmployee;
     controller();
-    EmployeeOnLeave()
     EmployeeCount();
+    EmployeeOnLeave();
     RequestLeaveCount();
 
     function controller() {
@@ -658,6 +660,8 @@
                 show(data);
 
                 function show(employee) {
+                    idEmployee = employee.employee_id;
+
                     document.getElementById('user').innerHTML = employee.namaLengkap;
                     if(employee.role.roleId == '1'){
                         document.getElementById('Hrd').style.display = 'block';
@@ -686,8 +690,8 @@
             .then(data => {
                 console.log(data)
                 const tbody = document.getElementById('countEmployee');
-
-                tbody.innerHTML = data
+                activeEmployee = data;
+                tbody.innerHTML = data;
 
 
             });
@@ -698,8 +702,10 @@
             .then(data => {
                 console.log(data)
                 const tbody = document.getElementById('acc');
+                activeEmployee-=data;
+                tbody.innerHTML = data;
+                document.getElementById('activeEmployeeCount').innerHTML=activeEmployee;
 
-                tbody.innerHTML = data
 
 
             });
@@ -834,22 +840,24 @@
 
                 function showTable(leave) {
                         nomer+=1;
-                        tbody.innerHTML += `<td>` + nomer + `</td>
+                        if (leave.pengajuanCuti.employee.employee_id === idEmployee) {
+                            tbody.innerHTML += `<td>` + nomer + `</td>
                             <td>` + leave.pengajuanCuti.employee.namaLengkap + `</td>
-                            <td>` + getFormattedDate(leave.tglCuti) +  `</td>
-                            <td>` + leave.pengajuanCuti.keterangan +  `</td>
-                            <td>` + leave.pengajuanCuti.lamaCuti +` days</td>
+                            <td>` + getFormattedDate(leave.tglCuti) + `</td>
+                            <td>` + leave.pengajuanCuti.keterangan + `</td>
+                            <td>` + leave.pengajuanCuti.lamaCuti + ` days</td>
                             <td>` + leave.pengajuanCuti.pengganti.namaLengkap + `</td>
                             <td>` + leave.pengajuanCuti.statusCuti.statusCuti + `</td>
                             <td class="td-actions text-right">
-                                <button type="button"  rel="tooltip" onclick="pdf(`+leave.detailPengajuanCutiId+`)" title="Download As Pdf"  class="btn btn-danger btn-link btn-sm">
+                                <button type="button"  rel="tooltip" onclick="pdf(` + leave.detailPengajuanCutiId + `)" title="Download As Pdf"  class="btn btn-danger btn-link btn-sm">
                                     <i class="fas fa-file-pdf fa-2x"></i>
                                 </button> &nbsp;
-                                <button type="button" rel="tooltip" onclick="modalController('Detail',\``+leave.pengajuanCuti.employee.namaLengkap+`\`,\``+leave.detailPengajuanCutiId+`\`,)" title="Details" class="btn btn-info btn-link btn-sm" >
+                                <button type="button" rel="tooltip" onclick="modalController('Detail',\`` + leave.pengajuanCuti.employee.namaLengkap + `\`,\`` + leave.detailPengajuanCutiId + `\`,)" title="Details" class="btn btn-info btn-link btn-sm" >
                                      <i class="fas fa-info-circle fa-2x"></i>
                                 </button>
 
                             </td>`
+                        }
                     
                 }
             });

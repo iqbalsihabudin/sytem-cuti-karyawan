@@ -48,7 +48,7 @@ public class DetailPengajuanCutiController {
         this.pdfGeneratorService = pdfGeneratorService;
     }
 
-    @GetMapping("/pdf/generate/{id}")
+        @GetMapping("/pdf/generate/{id}")
     public void generatePDF(@PathVariable("id") Integer id,HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:hh:mm:ss");
